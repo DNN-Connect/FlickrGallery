@@ -1,0 +1,21 @@
+﻿@using System.Collections.Generic
+@using Connect.DNN.Modules.FlickrGallery.Controllers
+@using Connect.DNN.Modules.FlickrGallery.Models.Photos
+@inherits Connect.DNN.Modules.FlickrGallery.Common.FlickrGalleryWebPage<int>
+@{
+ if (PageData.Count > 1)
+ {
+  Model = PageData[0];
+ }
+ DotNetNuke.Collections.IPagedList<Photo> list = PhotosController.GetPage(Dnn.Module.ModuleID, Model, 100);
+}
+
+@foreach (Photo p in list)
+{
+ <p>@p.SquareThumbnailUrl</p>
+}
+
+@if (list.Count() == 100)
+{
+ <a href="#" class="scroll-next">@Html.GetLocalizedString("LoadMore")</a>
+}

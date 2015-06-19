@@ -20,23 +20,22 @@ namespace Connect.DNN.Modules.FlickrGallery.Common
         #region Public Methods
         public void AddService()
         {
-            if (Context.Items["MapServiceAdded"] == null)
+            if (Context.Items["FlickrGalleryServiceAdded"] == null)
             {
                 JavaScript.RequestRegistration(CommonJs.DnnPlugins);
                 ServicesFramework.Instance.RequestAjaxScriptSupport();
                 ServicesFramework.Instance.RequestAjaxAntiForgerySupport();
-                ClientResourceManager.RegisterScript(Page, "http://maps.googleapis.com/maps/api/js", 70);
-                AddJavascriptFile("Connect.Map.js", 70);
-                string script = "(function($){$(document).ready(function(){ connectMapService = new ConnectMapService($, {}, " + ModuleContext.ModuleId + ") })})(jQuery);";
+                AddJavascriptFile("connect.flickrgallery.js", 70);
+                string script = "(function($){$(document).ready(function(){ galleryService = new GalleryService($, {}, " + ModuleContext.ModuleId + ") })})(jQuery);";
                 Page.ClientScript.RegisterClientScriptBlock(script.GetType(), ID + "_service", script, true);
-                Context.Items["MapServiceAdded"] = true;
+                Context.Items["FlickrGalleryServiceAdded"] = true;
             }
 
         }
 
         public void AddJavascriptFile(string jsFilename, int priority)
         {
-            ClientResourceManager.RegisterScript(Page, ResolveUrl("~/DesktopModules/Connect/Map/js/" + jsFilename) + "?_=" + Settings.Version, priority);
+            ClientResourceManager.RegisterScript(Page, ResolveUrl("~/DesktopModules/Connect/FlickrGallery/js/" + jsFilename) + "?_=" + Settings.Version, priority);
         }
         #endregion
 

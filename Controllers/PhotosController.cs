@@ -3,12 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using Connect.DNN.Modules.FlickrGallery.Models.Photos;
 using Connect.DNN.Modules.FlickrGallery.Repositories;
+using DotNetNuke.Collections;
 
 namespace Connect.DNN.Modules.FlickrGallery.Controllers
 {
 
     public partial class PhotosController
     {
+        public static IPagedList<Photo> GetPage(int moduleId, int pageIndex, int pageSize)
+        {
+            return GetPage(moduleId, "DateTaken", pageIndex, pageSize);
+        }
+
+        public static IPagedList<Photo> GetPage(int moduleId, string orderByField, int pageIndex, int pageSize)
+        {
+            PhotoRepository repo = new PhotoRepository();
+            IPagedList<Photo> res = repo.Find(pageIndex, pageSize, "WHERE ModuleId = @0 ORDER BY " + orderByField, moduleId);
+            return res;
+        }
 
         public static Dictionary<string, Photo> GetPhotos(int moduleId)
         {

@@ -1,2 +1,40 @@
 ﻿@inherits Connect.DNN.Modules.FlickrGallery.Common.FlickrGalleryWebPage
-<h1>Hello World</h1>
+<h1>Hello</h1>
+<div id="lstGallery">
+ @RenderPage("ServiceViews/GallerySegment.cshtml", 0, Dnn)
+</div>
+
+<script type="text/javascript">
+ var page = 0;
+
+ (function($) {
+
+  $(document).ready(function() {
+
+   $(window).scroll(function () {
+    if (window.innerHeight + $(window).scrollTop() > $('.scroll-next').offset().top) {
+     $('.scroll-next').remove();
+     page += 1;
+     galleryService.nextGallerySegment(page, 'GallerySegment', function(data) {
+      $('#lstGallery').append(data);
+     });
+    }
+   });
+
+   hookMoreLink();
+
+  });
+
+ }(jQuery, window.Sys));
+
+ function hookMoreLink() {
+  $('.scroll-next').click(function () {
+   $('.scroll-next').remove();
+   page += 1;
+   galleryService.nextGallerySegment(page, 'GallerySegment', function (data) {
+    $('#lstGallery').append(data);
+    hookMoreLink();
+   });
+  });
+ }
+</script>

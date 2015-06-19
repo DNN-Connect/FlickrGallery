@@ -41,23 +41,28 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DotNetNuke">
+    <Reference Include="DotNetNuke, Version=7.2.2.303, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>_References\DotNetNuke.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="DotNetNuke.Web">
+    <Reference Include="DotNetNuke.Web, Version=7.2.2.303, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>_References\DotNetNuke.Web.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="DotNetNuke.Web.Client">
+    <Reference Include="DotNetNuke.Web.Client, Version=7.2.2.303, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>_References\DotNetNuke.Web.Client.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="DotNetNuke.Web.Razor">
+    <Reference Include="DotNetNuke.Web.Razor, Version=7.2.2.303, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>_References\DotNetNuke.Web.Razor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="DotNetNuke.WebUtility">
+    <Reference Include="DotNetNuke.WebUtility, Version=4.2.1.783, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>_References\DotNetNuke.WebUtility.dll</HintPath>
       <Private>False</Private>
     </Reference>
@@ -106,6 +111,7 @@
     <Compile Include="Common\FlickrGalleryService.cs" />
     <Compile Include="Common\FlickrGalleryWebPage.cs" />
     <Compile Include="Common\Globals.cs" />
+    <Compile Include="Common\RazorControl.cs" />
     <Compile Include="Common\RouteMapper.cs" />
     <Compile Include="Common\Settings\ISettingsStore.cs" />
     <Compile Include="Common\ModuleBase.cs">
@@ -144,6 +150,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="js\connect.flickrgallery.js" />
     <Content Include="module.css" />
     <Content Include="Settings.ascx" />
   </ItemGroup>
@@ -161,6 +168,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ServiceViews\GallerySegment.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
