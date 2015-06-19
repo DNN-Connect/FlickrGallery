@@ -7,15 +7,20 @@
  {
   Model = PageData[0];
  }
- DotNetNuke.Collections.IPagedList<Photo> list = PhotosController.GetPage(Dnn.Module.ModuleID, Model, 100);
+ DotNetNuke.Collections.IPagedList<Photo> list = PhotosController.GetPage(Dnn.Module.ModuleID, Model, 50);
 }
 
 @foreach (Photo p in list)
 {
- <p>@p.SquareThumbnailUrl</p>
+ <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" data-src="@p.Medium800Url" data-w="@(p.Medium800Width)" data-h="@(p.Medium800Height)" data-title="@p.Title">
+  <a href="@p.Medium800Url" itemprop="contentUrl" data-size="@(p.Medium800Width)x@(p.Medium800Height)">
+   <img src="@p.SquareThumbnailUrl" itemprop="thumbnail" alt="Image description" width="75" height="75" />
+  </a>
+  <figcaption itemprop="caption description">@p.Title</figcaption>
+ </figure>
 }
 
-@if (list.Count() == 100)
+@if (list.Count() == 50)
 {
  <a href="#" class="scroll-next">@Html.GetLocalizedString("LoadMore")</a>
 }

@@ -93,3 +93,26 @@ function showError(message) {
 		setTimeout(function () { $('#cgStatus').hide(); }, 3000);
 	}
 }
+
+var initSwipe = function (slideSelector) {
+	$(slideSelector).unbind("click");
+	var pswpElement = document.querySelectorAll('.pswp')[0];
+	var slides = [];
+	$(slideSelector).each(function (i, el) {
+		var slide = {};
+		slide.src = $(this).attr('data-src');
+		slide.w = $(this).attr('data-w');
+		slide.h = $(this).attr('data-h');
+		slide.title = $(this).attr('data-title');
+		slides.push(slide);
+		$(this).click(function() {
+			var options = {
+				index: i
+			};
+			var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, slides, options);
+			gallery.init();
+			return false;
+		});
+	});
+}
+
