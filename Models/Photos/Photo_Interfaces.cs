@@ -24,7 +24,7 @@ namespace Connect.DNN.Modules.FlickrGallery.Models.Photos
   #endregion
 
   #region " IPropertyAccess Implementation "
-  public override string GetProperty(string strPropertyName, string strFormat, CultureInfo formatProvider, UserInfo accessingUser, Scope accessLevel, ref bool propertyNotFound)
+  public override string GetProperty(string strPropertyName, string strFormat, System.Globalization.CultureInfo formatProvider, DotNetNuke.Entities.Users.UserInfo accessingUser, DotNetNuke.Services.Tokens.Scope accessLevel, ref bool propertyNotFound)
   {
    switch (strPropertyName.ToLower()) {
     case "ownername": // NVarChar

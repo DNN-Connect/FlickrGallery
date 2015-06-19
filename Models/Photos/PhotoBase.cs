@@ -28,25 +28,13 @@ namespace Connect.DNN.Modules.FlickrGallery.Models.Photos
         [DataMember()]
         public DateTime? DateAddedToGroup { get; set; }
         [DataMember()]
-        public int? SquareThumbnailHeight { get; set; }
-        [DataMember()]
-        public int? SquareThumbnailWidth { get; set; }
-        [DataMember()]
         public string SquareThumbnailUrl { get; set; }
-        [DataMember()]
-        public int? ThumbnailHeight { get; set; }
-        [DataMember()]
-        public int? ThumbnailWidth { get; set; }
-        [DataMember()]
-        public string ThumbnailUrl { get; set; }
         [DataMember()]
         public int? Medium800Height { get; set; }
         [DataMember()]
         public int? Medium800Width { get; set; }
         [DataMember()]
         public string Medium800Url { get; set; }
-        [DataMember()]
-        public string WebUrl { get; set; }
         #endregion
 
         #region " Methods "
@@ -72,23 +60,8 @@ namespace Connect.DNN.Modules.FlickrGallery.Models.Photos
             if (photo.DateAddedToGroup != null)
             DateAddedToGroup = photo.DateAddedToGroup;
 
-            if (photo.SquareThumbnailHeight > -1)
-                SquareThumbnailHeight = photo.SquareThumbnailHeight;
-
-            if (photo.SquareThumbnailWidth > -1)
-                SquareThumbnailWidth = photo.SquareThumbnailWidth;
-
             if (!String.IsNullOrEmpty(photo.SquareThumbnailUrl))
                 SquareThumbnailUrl = photo.SquareThumbnailUrl;
-
-            if (photo.ThumbnailHeight > -1)
-                ThumbnailHeight = photo.ThumbnailHeight;
-
-            if (photo.ThumbnailWidth > -1)
-                ThumbnailWidth = photo.ThumbnailWidth;
-
-            if (!String.IsNullOrEmpty(photo.ThumbnailUrl))
-                ThumbnailUrl = photo.ThumbnailUrl;
 
             if (photo.Medium800Height > -1)
                 Medium800Height = photo.Medium800Height;
@@ -98,9 +71,6 @@ namespace Connect.DNN.Modules.FlickrGallery.Models.Photos
 
             if (!String.IsNullOrEmpty(photo.Medium800Url))
                 Medium800Url = photo.Medium800Url;
-
-            if (!String.IsNullOrEmpty(photo.WebUrl))
-                WebUrl = photo.WebUrl;
 
         }
         #endregion

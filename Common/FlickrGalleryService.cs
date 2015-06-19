@@ -81,13 +81,10 @@ namespace Connect.DNN.Modules.FlickrGallery.Common
                                     p.Medium800Height = photo.Medium800Height;
                                     p.Medium800Url = photo.Medium800Url;
                                     p.Medium800Width = photo.Medium800Width;
-                                    p.SquareThumbnailHeight = photo.SquareThumbnailHeight;
                                     p.SquareThumbnailUrl = photo.SquareThumbnailUrl;
-                                    p.SquareThumbnailWidth = photo.SquareThumbnailWidth;
                                     PhotosController.AddPhoto(ref p);
                                     added += 1;
                                 }
-                                //   Console.WriteLine("Photo {0} has title {1}", photo.PhotoID, photo.Title);
                             }
                             page += 1;
                         } while (photos.Count == 100);

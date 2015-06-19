@@ -24,16 +24,10 @@ namespace Connect.DNN.Modules.FlickrGallery.Models.Photos
    Title = Convert.ToString(Null.SetNull(dr["Title"], Title));
    DateTaken = (DateTime)(Null.SetNull(dr["DateTaken"], DateTaken));
    DateAddedToGroup = (DateTime)(Null.SetNull(dr["DateAddedToGroup"], DateAddedToGroup));
-   SquareThumbnailHeight = Convert.ToInt32(Null.SetNull(dr["SquareThumbnailHeight"], SquareThumbnailHeight));
-   SquareThumbnailWidth = Convert.ToInt32(Null.SetNull(dr["SquareThumbnailWidth"], SquareThumbnailWidth));
    SquareThumbnailUrl = Convert.ToString(Null.SetNull(dr["SquareThumbnailUrl"], SquareThumbnailUrl));
-   ThumbnailHeight = Convert.ToInt32(Null.SetNull(dr["ThumbnailHeight"], ThumbnailHeight));
-   ThumbnailWidth = Convert.ToInt32(Null.SetNull(dr["ThumbnailWidth"], ThumbnailWidth));
-   ThumbnailUrl = Convert.ToString(Null.SetNull(dr["ThumbnailUrl"], ThumbnailUrl));
    Medium800Height = Convert.ToInt32(Null.SetNull(dr["Medium800Height"], Medium800Height));
    Medium800Width = Convert.ToInt32(Null.SetNull(dr["Medium800Width"], Medium800Width));
    Medium800Url = Convert.ToString(Null.SetNull(dr["Medium800Url"], Medium800Url));
-   WebUrl = Convert.ToString(Null.SetNull(dr["WebUrl"], WebUrl));
         }
 
         [IgnoreColumn()]
@@ -45,7 +39,7 @@ namespace Connect.DNN.Modules.FlickrGallery.Models.Photos
         #endregion
 
         #region " IPropertyAccess Methods "
-        public virtual string GetProperty(string strPropertyName, string strFormat, CultureInfo formatProvider, UserInfo accessingUser, Scope accessLevel, ref bool propertyNotFound)
+        public virtual string GetProperty(string strPropertyName, string strFormat, System.Globalization.CultureInfo formatProvider, DotNetNuke.Entities.Users.UserInfo accessingUser, DotNetNuke.Services.Tokens.Scope accessLevel, ref bool propertyNotFound)
         {
             switch (strPropertyName.ToLower())
             {
@@ -71,42 +65,12 @@ namespace Connect.DNN.Modules.FlickrGallery.Models.Photos
          return "";
      };
      return ((DateTime)DateAddedToGroup).ToString(strFormat, formatProvider);
-    case "squarethumbnailheight": // Int
-     if (SquareThumbnailHeight == null);
-     {
-         return "";
-     };
-     return ((int)SquareThumbnailHeight).ToString(strFormat, formatProvider);
-    case "squarethumbnailwidth": // Int
-     if (SquareThumbnailWidth == null);
-     {
-         return "";
-     };
-     return ((int)SquareThumbnailWidth).ToString(strFormat, formatProvider);
     case "squarethumbnailurl": // NVarChar
      if (SquareThumbnailUrl == null);
      {
          return "";
      };
      return PropertyAccess.FormatString(SquareThumbnailUrl, strFormat);
-    case "thumbnailheight": // Int
-     if (ThumbnailHeight == null);
-     {
-         return "";
-     };
-     return ((int)ThumbnailHeight).ToString(strFormat, formatProvider);
-    case "thumbnailwidth": // Int
-     if (ThumbnailWidth == null);
-     {
-         return "";
-     };
-     return ((int)ThumbnailWidth).ToString(strFormat, formatProvider);
-    case "thumbnailurl": // NVarChar
-     if (ThumbnailUrl == null);
-     {
-         return "";
-     };
-     return PropertyAccess.FormatString(ThumbnailUrl, strFormat);
     case "medium800height": // Int
      if (Medium800Height == null);
      {
@@ -125,12 +89,6 @@ namespace Connect.DNN.Modules.FlickrGallery.Models.Photos
          return "";
      };
      return PropertyAccess.FormatString(Medium800Url, strFormat);
-    case "weburl": // NVarChar
-     if (WebUrl == null);
-     {
-         return "";
-     };
-     return PropertyAccess.FormatString(WebUrl, strFormat);
                 default:
                     propertyNotFound = true;
                     break;
