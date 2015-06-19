@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Connect.DNN.Modules.FlickrGallery</RootNamespace>
     <AssemblyName>Connect.DNN.Modules.FlickrGallery</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -29,6 +29,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,23 +38,51 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DotNetNuke, Version=7.0.2.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\bin\DotNetNuke.dll</HintPath>
+    <Reference Include="DotNetNuke">
+      <HintPath>_References\DotNetNuke.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="DotNetNuke.WebUtility, Version=4.2.1.783, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\bin\DotNetNuke.WebUtility.dll</HintPath>
+    <Reference Include="DotNetNuke.Web">
+      <HintPath>_References\DotNetNuke.Web.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DotNetNuke.Web.Client">
+      <HintPath>_References\DotNetNuke.Web.Client.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DotNetNuke.Web.Razor">
+      <HintPath>_References\DotNetNuke.Web.Razor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DotNetNuke.WebUtility">
+      <HintPath>_References\DotNetNuke.WebUtility.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FlickrNet">
+      <HintPath>packages\FlickrNet.3.16.0\lib\net20\FlickrNet.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>_References\System.Net.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>_References\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>_References\System.Web.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -61,15 +90,11 @@
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Edit.ascx.cs">
-      <DependentUpon>Edit.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Edit.ascx.designer.cs">
-      <DependentUpon>Edit.ascx</DependentUpon>
-    </Compile>
+    <Compile Include="Common\ISettingsStore.cs" />
+    <Compile Include="Common\ModuleBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.ascx.cs">
       <DependentUpon>Settings.ascx</DependentUpon>
@@ -80,7 +105,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Edit.ascx" />
     <Content Include="module.css" />
     <Content Include="Settings.ascx" />
   </ItemGroup>
@@ -88,11 +112,13 @@
     <Content Include="FlickrGallery.dnn" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_LocalResources\View.ascx.resx" />
+    <Content Include="App_LocalResources\SharedResources.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_LocalResources\Edit.ascx.resx" />
     <Content Include="App_LocalResources\Settings.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
