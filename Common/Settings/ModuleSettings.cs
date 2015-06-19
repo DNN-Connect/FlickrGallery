@@ -11,9 +11,14 @@ namespace Connect.DNN.Modules.FlickrGallery.Common.Settings
         #region Properties
         internal ISettingsStore Store;
 
-        public string View
+        public string FlickrApiKey
         {
-            get { return Store.Get("Home"); }
+            get { return Store.Get(""); }
+            set { Store.Set(value); }
+        }
+        public string FlickrGroupId
+        {
+            get { return Store.Get(""); }
             set { Store.Set(value); }
         }
         public int ThumbnailSize

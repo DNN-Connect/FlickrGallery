@@ -25,7 +25,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\bin\</OutputPath>
+    <OutputPath>..\..\..\bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -73,6 +73,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>_References\System.Net.Http.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>_References\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -82,6 +87,10 @@
     <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>_References\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>_References\System.Web.WebPages.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -93,9 +102,39 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\ISettingsStore.cs" />
-    <Compile Include="Common\ModuleBase.cs" />
+    <Compile Include="Common\FlickrGalleryApiController.cs" />
+    <Compile Include="Common\FlickrGalleryService.cs" />
+    <Compile Include="Common\FlickrGalleryWebPage.cs" />
+    <Compile Include="Common\Globals.cs" />
+    <Compile Include="Common\RouteMapper.cs" />
+    <Compile Include="Common\Settings\ISettingsStore.cs" />
+    <Compile Include="Common\ModuleBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\Settings\ModuleScopedSettings.cs" />
+    <Compile Include="Common\Settings\ModuleSettings.cs" />
+    <Compile Include="Common\Settings\StringBasedSettings.cs" />
+    <Compile Include="Controllers\PhotographersController.cs" />
+    <Compile Include="Controllers\PhotographersController_Services.cs" />
+    <Compile Include="Controllers\PhotosController.cs" />
+    <Compile Include="Controllers\PhotosController_Services.cs" />
+    <Compile Include="Data\RepositoryImpl.cs" />
+    <Compile Include="Models\Photographers\Photographer.cs" />
+    <Compile Include="Models\Photographers\PhotographerBase.cs" />
+    <Compile Include="Models\Photographers\PhotographerBase_Interfaces.cs" />
+    <Compile Include="Models\Photographers\Photographer_Interfaces.cs" />
+    <Compile Include="Models\Photos\Photo.cs" />
+    <Compile Include="Models\Photos\PhotoBase.cs" />
+    <Compile Include="Models\Photos\PhotoBase_Interfaces.cs" />
+    <Compile Include="Models\Photos\Photo_Interfaces.cs" />
+    <Compile Include="ModuleHome.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\PhotoBaseRepository.cs" />
+    <Compile Include="Repositories\PhotographerBaseRepository.cs" />
+    <Compile Include="Repositories\PhotographerRepository.cs" />
+    <Compile Include="Repositories\PhotoRepository.cs" />
     <Compile Include="Settings.ascx.cs">
       <DependentUpon>Settings.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -119,6 +158,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -154,7 +196,4 @@
     <PackageName>FlickrGallery</PackageName>
     <MSBuildCommunityTasksPath>$(SolutionDir)\packages\MSBuildTasks.1.4.0.74\tools</MSBuildCommunityTasksPath>
   </PropertyGroup>
-  <Import Project="BuildScripts\ModulePackage.Targets" />
-  <Target Name="AfterBuild" DependsOnTargets="PackageModule">
-  </Target>
 </Project>

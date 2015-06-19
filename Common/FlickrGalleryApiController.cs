@@ -1,5 +1,5 @@
-﻿using DotNetNuke.Web.Api;
-using Connect.DNN.Modules.FlickrGallery.Common.Settings;
+﻿using Connect.DNN.Modules.FlickrGallery.Common.Settings;
+using DotNetNuke.Web.Api;
 
 namespace Connect.DNN.Modules.FlickrGallery.Common
 {

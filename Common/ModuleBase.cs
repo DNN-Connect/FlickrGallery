@@ -1,8 +1,8 @@
-﻿using DotNetNuke.Framework;
+﻿using Connect.DNN.Modules.FlickrGallery.Common.Settings;
+using DotNetNuke.Framework;
 using DotNetNuke.Framework.JavaScriptLibraries;
 using DotNetNuke.Web.Client.ClientResourceManagement;
 using DotNetNuke.Web.Razor;
-using Connect.DNN.Modules.FlickrGallery.Common.Settings;
 
 namespace Connect.DNN.Modules.FlickrGallery.Common
 {

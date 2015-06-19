@@ -1,5 +1,5 @@
-﻿using DotNetNuke.Web.Razor;
-using Connect.DNN.Modules.FlickrGallery.Common.Settings;
+﻿using Connect.DNN.Modules.FlickrGallery.Common.Settings;
+using DotNetNuke.Web.Razor;
 
 namespace Connect.DNN.Modules.FlickrGallery.Common
 {

@@ -1,5 +1,4 @@
 ﻿using System;
-using DotNetNuke.Collections;
 using Connect.DNN.Modules.FlickrGallery.Common;
 
 namespace Connect.DNN.Modules.FlickrGallery
@@ -18,7 +17,7 @@ namespace Connect.DNN.Modules.FlickrGallery
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            View = Request.QueryString.GetValueOrDefault<string>("View", Settings.View);
+            View = "Home";
             AddService();
             LocalResourceFile = Globals.SharedResourceFileName;
         }

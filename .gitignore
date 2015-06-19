@@ -158,3 +158,5 @@ $RECYCLE.BIN/
 packages
 *.config
 _References
+_Development
+_BuildSupport
