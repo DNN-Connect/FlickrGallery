@@ -48,7 +48,7 @@ var PhotoSwipeUI_Default =
 		_options,
 		_defaultUIOptions = {
 			barsSize: {top:44, bottom:'auto'},
-			closeElClasses: ['item', 'caption', 'zoom-wrap', 'ui', 'top-bar'], 
+			closeElClasses: [], 
 			timeToIdle: 4000, 
 			timeToIdleOutside: 1000,
 			loadingIndicatorDelay: 1000, // 2s
@@ -74,7 +74,7 @@ var PhotoSwipeUI_Default =
 			tapToClose: false,
 			tapToToggleControls: true,
 
-			clickToCloseNonZoomable: true,
+			clickToCloseNonZoomable: false,
 
 			shareButtons: [
 				{id:'facebook', label:'Share on Facebook', url:'https://www.facebook.com/sharer/sharer.php?u={{url}}'},
