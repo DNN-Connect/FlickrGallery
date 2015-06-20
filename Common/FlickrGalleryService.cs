@@ -78,10 +78,10 @@ namespace Connect.DNN.Modules.FlickrGallery.Common
                                     p.PhotographerId = photographer.PhotographerId;
                                     p.DateAddedToGroup = photo.DateAddedToGroup;
                                     p.DateTaken = photo.DateTaken;
-                                    p.Medium800Height = photo.Medium800Height;
-                                    p.Medium800Url = photo.Medium800Url;
-                                    p.Medium800Width = photo.Medium800Width;
-                                    p.SquareThumbnailUrl = photo.SquareThumbnailUrl;
+                                    p.LargeHeight = photo.LargeHeight;
+                                    p.LargeUrl = photo.LargeUrl;
+                                    p.LargeWidth = photo.LargeWidth;
+                                    p.LargeSquareThumbnailUrl = photo.LargeSquareThumbnailUrl;
                                     PhotosController.AddPhoto(ref p);
                                     added += 1;
                                 }

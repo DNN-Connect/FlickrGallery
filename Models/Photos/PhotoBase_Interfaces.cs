@@ -24,10 +24,10 @@ namespace Connect.DNN.Modules.FlickrGallery.Models.Photos
    Title = Convert.ToString(Null.SetNull(dr["Title"], Title));
    DateTaken = (DateTime)(Null.SetNull(dr["DateTaken"], DateTaken));
    DateAddedToGroup = (DateTime)(Null.SetNull(dr["DateAddedToGroup"], DateAddedToGroup));
-   SquareThumbnailUrl = Convert.ToString(Null.SetNull(dr["SquareThumbnailUrl"], SquareThumbnailUrl));
-   Medium800Height = Convert.ToInt32(Null.SetNull(dr["Medium800Height"], Medium800Height));
-   Medium800Width = Convert.ToInt32(Null.SetNull(dr["Medium800Width"], Medium800Width));
-   Medium800Url = Convert.ToString(Null.SetNull(dr["Medium800Url"], Medium800Url));
+   LargeSquareThumbnailUrl = Convert.ToString(Null.SetNull(dr["LargeSquareThumbnailUrl"], LargeSquareThumbnailUrl));
+   LargeHeight = Convert.ToInt32(Null.SetNull(dr["LargeHeight"], LargeHeight));
+   LargeWidth = Convert.ToInt32(Null.SetNull(dr["LargeWidth"], LargeWidth));
+   LargeUrl = Convert.ToString(Null.SetNull(dr["LargeUrl"], LargeUrl));
         }
 
         [IgnoreColumn()]
@@ -65,30 +65,30 @@ namespace Connect.DNN.Modules.FlickrGallery.Models.Photos
          return "";
      };
      return ((DateTime)DateAddedToGroup).ToString(strFormat, formatProvider);
-    case "squarethumbnailurl": // NVarChar
-     if (SquareThumbnailUrl == null);
+    case "largesquarethumbnailurl": // NVarChar
+     if (LargeSquareThumbnailUrl == null);
      {
          return "";
      };
-     return PropertyAccess.FormatString(SquareThumbnailUrl, strFormat);
-    case "medium800height": // Int
-     if (Medium800Height == null);
+     return PropertyAccess.FormatString(LargeSquareThumbnailUrl, strFormat);
+    case "largeheight": // Int
+     if (LargeHeight == null);
      {
          return "";
      };
-     return ((int)Medium800Height).ToString(strFormat, formatProvider);
-    case "medium800width": // Int
-     if (Medium800Width == null);
+     return ((int)LargeHeight).ToString(strFormat, formatProvider);
+    case "largewidth": // Int
+     if (LargeWidth == null);
      {
          return "";
      };
-     return ((int)Medium800Width).ToString(strFormat, formatProvider);
-    case "medium800url": // NVarChar
-     if (Medium800Url == null);
+     return ((int)LargeWidth).ToString(strFormat, formatProvider);
+    case "largeurl": // NVarChar
+     if (LargeUrl == null);
      {
          return "";
      };
-     return PropertyAccess.FormatString(Medium800Url, strFormat);
+     return PropertyAccess.FormatString(LargeUrl, strFormat);
                 default:
                     propertyNotFound = true;
                     break;

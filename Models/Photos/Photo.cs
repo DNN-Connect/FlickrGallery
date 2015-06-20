@@ -39,10 +39,10 @@ namespace Connect.DNN.Modules.FlickrGallery.Models.Photos
              res.Title = Title;
              res.DateTaken = DateTaken;
              res.DateAddedToGroup = DateAddedToGroup;
-             res.SquareThumbnailUrl = SquareThumbnailUrl;
-             res.Medium800Height = Medium800Height;
-             res.Medium800Width = Medium800Width;
-             res.Medium800Url = Medium800Url;
+             res.LargeSquareThumbnailUrl = LargeSquareThumbnailUrl;
+             res.LargeHeight = LargeHeight;
+             res.LargeWidth = LargeWidth;
+             res.LargeUrl = LargeUrl;
             return res;
         }
         #endregion

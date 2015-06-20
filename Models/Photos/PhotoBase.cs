@@ -28,13 +28,13 @@ namespace Connect.DNN.Modules.FlickrGallery.Models.Photos
         [DataMember()]
         public DateTime? DateAddedToGroup { get; set; }
         [DataMember()]
-        public string SquareThumbnailUrl { get; set; }
+        public string LargeSquareThumbnailUrl { get; set; }
         [DataMember()]
-        public int? Medium800Height { get; set; }
+        public int? LargeHeight { get; set; }
         [DataMember()]
-        public int? Medium800Width { get; set; }
+        public int? LargeWidth { get; set; }
         [DataMember()]
-        public string Medium800Url { get; set; }
+        public string LargeUrl { get; set; }
         #endregion
 
         #region " Methods "
@@ -60,17 +60,17 @@ namespace Connect.DNN.Modules.FlickrGallery.Models.Photos
             if (photo.DateAddedToGroup != null)
             DateAddedToGroup = photo.DateAddedToGroup;
 
-            if (!String.IsNullOrEmpty(photo.SquareThumbnailUrl))
-                SquareThumbnailUrl = photo.SquareThumbnailUrl;
+            if (!String.IsNullOrEmpty(photo.LargeSquareThumbnailUrl))
+                LargeSquareThumbnailUrl = photo.LargeSquareThumbnailUrl;
 
-            if (photo.Medium800Height > -1)
-                Medium800Height = photo.Medium800Height;
+            if (photo.LargeHeight > -1)
+                LargeHeight = photo.LargeHeight;
 
-            if (photo.Medium800Width > -1)
-                Medium800Width = photo.Medium800Width;
+            if (photo.LargeWidth > -1)
+                LargeWidth = photo.LargeWidth;
 
-            if (!String.IsNullOrEmpty(photo.Medium800Url))
-                Medium800Url = photo.Medium800Url;
+            if (!String.IsNullOrEmpty(photo.LargeUrl))
+                LargeUrl = photo.LargeUrl;
 
         }
         #endregion
