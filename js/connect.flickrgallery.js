@@ -8,9 +8,11 @@ function GalleryService($, settings, mid) {
 
 	this.viewCall = function (controller, action, view, id, success, fail) {
 		showLoading();
+		var path = baseServicepath + controller + '/' + action;
+		if (id != null) { path += '/' + id }
 		$.ajax({
 			type: "GET",
-			url: baseServicepath + controller + '/' + action + '/' + id,
+			url: path,
 			beforeSend: $.dnnSF(moduleId).setModuleHeaders,
 			data: { view: view }
 		}).done(function (data) {
@@ -26,48 +28,11 @@ function GalleryService($, settings, mid) {
 		});
 	}
 
-	this.dataCall = function (controller, action, data, success, fail) {
-		showLoading();
-		$.ajax({
-			type: "GET",
-			url: baseServicepath + controller + '/' + action,
-			beforeSend: $.dnnSF(moduleId).setModuleHeaders,
-			data: data
-		}).done(function (retdata) {
-			hideLoading();
-			if (success != undefined) {
-				success(retdata);
-			}
-		}).fail(function (xhr, status) {
-			showError(xhr.responseText);
-			if (fail != undefined) {
-				fail(xhr.responseText);
-			}
-		});
+	this.nextGallerySegment = function (id, success, fail) {
+		this.viewCall('Photos', 'Page', null, id, success, fail);
 	}
-
-	this.apiPostCall = function (controller, action, data, success, fail) {
-		showLoading();
-		$.ajax({
-			type: "POST",
-			url: baseServicepath + controller + '/' + action,
-			beforeSend: $.dnnSF(moduleId).setModuleHeaders,
-			data: data
-		}).done(function (retdata) {
-			hideLoading();
-			if (success != undefined) {
-				success(retdata);
-			}
-		}).fail(function (xhr, status) {
-			showError(xhr.responseText);
-			if (fail != undefined) {
-				fail(xhr.responseText);
-			}
-		});
-	}
-
-	this.nextGallerySegment = function (id, view, success, fail) {
-		this.viewCall('Photos', 'Page', view, id, success, fail);
+	this.list = function (success, fail) {
+		this.viewCall('Photos', 'List', null, null, success, fail);
 	}
 }
 
@@ -94,25 +59,17 @@ function showError(message) {
 	}
 }
 
+var allSlides = [];
 var initSwipe = function (slideSelector) {
 	$(slideSelector).unbind("click");
 	var pswpElement = document.querySelectorAll('.pswp')[0];
-	var slides = [];
-	$(slideSelector).each(function (i, el) {
-		var slide = {};
-		slide.src = $(this).attr('data-src');
-		slide.w = $(this).attr('data-w');
-		slide.h = $(this).attr('data-h');
-		slide.title = $(this).attr('data-title');
-		slides.push(slide);
-		$(this).click(function() {
-			var options = {
-				index: i
-			};
-			var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, slides, options);
-			gallery.init();
-			return false;
-		});
+	$(slideSelector).click(function () {
+		var options = {
+			index: $(this).index()
+		};
+		var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, allSlides, options);
+		gallery.init();
+		return false;
 	});
 }
 

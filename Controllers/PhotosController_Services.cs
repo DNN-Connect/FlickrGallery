@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -11,13 +12,13 @@ namespace Connect.DNN.Modules.FlickrGallery.Controllers
 {
 
     public partial class PhotosController : FlickrGalleryApiController
-	{
+    {
 
-		#region " Service Methods "
-		[HttpGet()]
-		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
-		public HttpResponseMessage Page(int id, string view)
-		{
+        #region " Service Methods "
+        [HttpGet()]
+        [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
+        public HttpResponseMessage Page(int id)
+        {
             RazorControl ctl = new RazorControl(ActiveModule,
                 "~/DesktopModules/Connect/FlickrGallery/Views/ServiceViews/GallerySegment.cshtml",
                 Globals.SharedResourceFileName);
@@ -25,8 +26,28 @@ namespace Connect.DNN.Modules.FlickrGallery.Controllers
             HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK) { Content = content };
             return res;
         }
-		#endregion
 
-	}
+        [HttpGet()]
+        [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
+        public HttpResponseMessage List()
+        {
+            List<PhotoSwipePhoto> res = new List<PhotoSwipePhoto>();
+            foreach (Models.Photos.Photo p in GetPhotos(ActiveModule.ModuleID).Values)
+            {
+                res.Add(new PhotoSwipePhoto() { src = p.LargeUrl, w = p.LargeWidth, h = p.LargeHeight, title = p.Title });
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, res);
+        }
+
+        public class PhotoSwipePhoto
+        {
+            public string src { get; set; }
+            public int? w { get; set; }
+            public int? h { get; set; }
+            public string title { get; set; }
+        }
+        #endregion
+
+    }
 }
 

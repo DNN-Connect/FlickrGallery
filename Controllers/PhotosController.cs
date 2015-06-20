@@ -24,8 +24,13 @@ namespace Connect.DNN.Modules.FlickrGallery.Controllers
 
         public static Dictionary<string, Photo> GetPhotos(int moduleId)
         {
+            return GetPhotos(moduleId, "DateTaken");
+        }
+
+        public static Dictionary<string, Photo> GetPhotos(int moduleId, string orderByField)
+        {
             PhotoRepository repo = new PhotoRepository();
-            return repo.Get(moduleId).ToDictionary(p => p.FlickrId, p => p);
+            return repo.Find("WHERE ModuleId = @0 ORDER BY " + orderByField, moduleId).ToDictionary(p => p.FlickrId, p => p);
         }
 
         public static Photo GetPhoto(int photoId)

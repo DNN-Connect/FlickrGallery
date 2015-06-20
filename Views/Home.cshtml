@@ -50,11 +50,15 @@
     if (window.innerHeight + $(window).scrollTop() > $('.scroll-next').offset().top) {
      $('.scroll-next').remove();
      page += 1;
-     galleryService.nextGallerySegment(page, 'GallerySegment', function(data) {
+     galleryService.nextGallerySegment(page, function(data) {
       $('#lstGallery').append(data);
       initSwipe('.cfg-gallery figure');
      });
     }
+   });
+
+   galleryService.list(function(data) {
+    allSlides = data;
    });
 
    hookMoreLink();
@@ -68,7 +72,7 @@
   $('.scroll-next').click(function () {
    $('.scroll-next').remove();
    page += 1;
-   galleryService.nextGallerySegment(page, 'GallerySegment', function (data) {
+   galleryService.nextGallerySegment(page, function (data) {
     $('#lstGallery').append(data);
     hookMoreLink();
    });
