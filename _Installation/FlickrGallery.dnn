@@ -3,7 +3,7 @@
   <package name="FlickrGallery" type="Module" version="01.00.00">
    <friendlyName>Flickr Gallery</friendlyName>
    <description>DNN Connect Flickr Gallery module</description>
-   <iconFile>Images/icon_extensions.gif</iconFile>
+   <iconFile>DesktopModules/Connect/FlickrGallery/img/Flickr.png</iconFile>
    <owner>
     <name>DNN Connect</name>
     <organization>DNN Connect Association</organization>
