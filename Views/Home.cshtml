@@ -1,4 +1,8 @@
-﻿@inherits Connect.DNN.Modules.FlickrGallery.Common.FlickrGalleryWebPage
+﻿@inherits FlickrGalleryWebPage
+@using Connect.DNN.Modules.FlickrGallery.Common;
+@{ 
+    var firstPage = new ContentPage(0);
+}
 <div id="lstGallery" class="cfg-gallery" itemscope itemtype="http://schema.org/ImageGallery">
  @RenderPage("ServiceViews/GallerySegment.cshtml", 0, Dnn)
 </div>

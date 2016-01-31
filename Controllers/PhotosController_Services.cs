@@ -22,7 +22,8 @@ namespace Connect.DNN.Modules.FlickrGallery.Controllers
             RazorControl ctl = new RazorControl(ActiveModule,
                 "~/DesktopModules/Connect/FlickrGallery/Views/ServiceViews/GallerySegment.cshtml",
                 Globals.SharedResourceFileName);
-            StringContent content = new StringContent(ctl.RenderObject(id), Encoding.UTF8, "text/html");
+            var nextPage = new ContentPage(id);
+            StringContent content = new StringContent(ctl.RenderObject(nextPage), Encoding.UTF8, "text/html");
             HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK) { Content = content };
             return res;
         }

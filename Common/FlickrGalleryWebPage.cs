@@ -43,7 +43,7 @@ namespace Connect.DNN.Modules.FlickrGallery.Common
             }
         }
     }
-    public abstract class FlickrGalleryWebPage<T> : DotNetNukeWebPage<T>
+    public abstract class FlickrGalleryWebPage<TModel> : DotNetNukeWebPage<TModel> where TModel : class
     {
         private ModuleSettings _settings;
         public ModuleSettings Settings
