@@ -120,6 +120,12 @@
   <data name="ControlTitle_settings.Text" xml:space="preserve">
     <value>Flickr Gallery Settings</value>
   </data>
+  <data name="lblFlickrAlbumId.Help" xml:space="preserve">
+    <value>Fill in the Flickr album ID if you wish to only display this album</value>
+  </data>
+  <data name="lblFlickrAlbumId.Text" xml:space="preserve">
+    <value>Flickr Album ID</value>
+  </data>
   <data name="lblFlickrApiKey.Help" xml:space="preserve">
     <value>You need to get an API key from the Flickr website. Please go to https://www.flickr.com/services/api/ to find out more.</value>
   </data>
@@ -131,5 +137,17 @@
   </data>
   <data name="lblFlickrGroupId.Text" xml:space="preserve">
     <value>Flickr Group ID</value>
+  </data>
+  <data name="lblFlickrUserId.Help" xml:space="preserve">
+    <value>Fill this in if you wish to retrieve all abums for this user</value>
+  </data>
+  <data name="lblFlickrUserId.Text" xml:space="preserve">
+    <value>Flickr User ID</value>
+  </data>
+  <data name="lblIncludeInService.Help" xml:space="preserve">
+    <value>When checked the gallery will be synchronized with Flickr every time the module's scheduled task runs. Uncheck this if the gallery is very large and/or updated very infrequently.</value>
+  </data>
+  <data name="lblIncludeInService.Text" xml:space="preserve">
+    <value>Include in service</value>
   </data>
 </root>

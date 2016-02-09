@@ -7,9 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Web.UI;
-using System.Web.UI.WebControls;
-
 namespace Connect.DNN.Modules.FlickrGallery {
     
     
@@ -22,7 +19,7 @@ namespace Connect.DNN.Modules.FlickrGallery {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected UserControl lblFlickrApiKey;
+        protected global::System.Web.UI.UserControl lblFlickrApiKey;
         
         /// <summary>
         /// txtFlickrApiKey control.
@@ -31,7 +28,7 @@ namespace Connect.DNN.Modules.FlickrGallery {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected TextBox txtFlickrApiKey;
+        protected global::System.Web.UI.WebControls.TextBox txtFlickrApiKey;
         
         /// <summary>
         /// lblFlickrGroupId control.
@@ -40,7 +37,7 @@ namespace Connect.DNN.Modules.FlickrGallery {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected UserControl lblFlickrGroupId;
+        protected global::System.Web.UI.UserControl lblFlickrGroupId;
         
         /// <summary>
         /// txtFlickrGroupId control.
@@ -49,6 +46,60 @@ namespace Connect.DNN.Modules.FlickrGallery {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected TextBox txtFlickrGroupId;
+        protected global::System.Web.UI.WebControls.TextBox txtFlickrGroupId;
+        
+        /// <summary>
+        /// lblFlickrUserId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UserControl lblFlickrUserId;
+        
+        /// <summary>
+        /// txtFlickrUserId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFlickrUserId;
+        
+        /// <summary>
+        /// lblFlickrAlbumId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UserControl lblFlickrAlbumId;
+        
+        /// <summary>
+        /// txtFlickrAlbumId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFlickrAlbumId;
+        
+        /// <summary>
+        /// lblIncludeInService control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UserControl lblIncludeInService;
+        
+        /// <summary>
+        /// chkIncludeInService control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkIncludeInService;
     }
 }

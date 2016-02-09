@@ -1,19 +1,18 @@
 
 using System;
 using System.Data;
-using System.Globalization;
+
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.ComponentModel.DataAnnotations;
 using DotNetNuke.Entities.Modules;
-using DotNetNuke.Entities.Users;
 using DotNetNuke.Services.Tokens;
 
-namespace Connect.DNN.Modules.FlickrGallery.Models.Photos
+namespace Connect.FlickrGallery.Core.Models.Photos
 {
     public partial class PhotoBase : IHydratable, IPropertyAccess
     {
 
-        #region " IHydratable Methods "
+        #region IHydratable
 
         public virtual void Fill(IDataReader dr)
         {
@@ -38,7 +37,7 @@ namespace Connect.DNN.Modules.FlickrGallery.Models.Photos
         }
         #endregion
 
-        #region " IPropertyAccess Methods "
+        #region IPropertyAccess
         public virtual string GetProperty(string strPropertyName, string strFormat, System.Globalization.CultureInfo formatProvider, DotNetNuke.Entities.Users.UserInfo accessingUser, DotNetNuke.Services.Tokens.Scope accessLevel, ref bool propertyNotFound)
         {
             switch (strPropertyName.ToLower())
@@ -52,7 +51,7 @@ namespace Connect.DNN.Modules.FlickrGallery.Models.Photos
     case "photographerid": // Int
      return PhotographerId.ToString(strFormat, formatProvider);
     case "title": // NVarChar
-     if (Title == null);
+     if (Title == null)
      {
          return "";
      };
@@ -60,31 +59,31 @@ namespace Connect.DNN.Modules.FlickrGallery.Models.Photos
     case "datetaken": // DateTime
      return DateTaken.ToString(strFormat, formatProvider);
     case "dateaddedtogroup": // DateTime
-     if (DateAddedToGroup == null);
+     if (DateAddedToGroup == null)
      {
          return "";
      };
      return ((DateTime)DateAddedToGroup).ToString(strFormat, formatProvider);
     case "largesquarethumbnailurl": // NVarChar
-     if (LargeSquareThumbnailUrl == null);
+     if (LargeSquareThumbnailUrl == null)
      {
          return "";
      };
      return PropertyAccess.FormatString(LargeSquareThumbnailUrl, strFormat);
     case "largeheight": // Int
-     if (LargeHeight == null);
+     if (LargeHeight == null)
      {
          return "";
      };
      return ((int)LargeHeight).ToString(strFormat, formatProvider);
     case "largewidth": // Int
-     if (LargeWidth == null);
+     if (LargeWidth == null)
      {
          return "";
      };
      return ((int)LargeWidth).ToString(strFormat, formatProvider);
     case "largeurl": // NVarChar
-     if (LargeUrl == null);
+     if (LargeUrl == null)
      {
          return "";
      };

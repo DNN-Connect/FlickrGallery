@@ -1,15 +1,22 @@
 ﻿@inherits FlickrGalleryWebPage<ContentPage>
 @using Connect.FlickrGallery.Core.Repositories;
 @using Connect.DNN.Modules.FlickrGallery.Common;
+@using Connect.FlickrGallery.Core.Repositories;
+@using Connect.FlickrGallery.Core.Models.AlbumPhotos;
 @{
     if (PageData.Count > 1)
     {
      Model = new ContentPage(PageData[0]);
     }
-    DotNetNuke.Collections.IPagedList<Connect.FlickrGallery.Core.Models.Photos.Photo> list = PhotoRepository.Instance.GetPage(Dnn.Module.ModuleID, Model.PageNr, 50);
+    var albumId = -1;
+    if (HttpContext.Current.Request.Params["AlbumId"] != null)
+    {
+     albumId = int.Parse(HttpContext.Current.Request.Params["AlbumId"]);
+    }
+    DotNetNuke.Collections.IPagedList<AlbumPhoto> list = AlbumPhotoRepository.Instance.GetPage(Dnn.Module.ModuleID, albumId, Model.PageNr, 50);
 }
 
-@foreach (Connect.FlickrGallery.Core.Models.Photos.Photo p in list)
+@foreach (AlbumPhoto p in list)
 {
  <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" data-src="@p.LargeUrl" data-w="@(p.LargeWidth)" data-h="@(p.LargeHeight)" data-title="@p.Title">
   <a href="@p.LargeUrl" itemprop="contentUrl" data-size="@(p.LargeWidth)x@(p.LargeHeight)">

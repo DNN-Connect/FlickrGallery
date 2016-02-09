@@ -10,5 +10,17 @@
   <dnn:label ID="lblFlickrGroupId" runat="server" controlname="txtFlickrGroupId" suffix=":" />
   <asp:TextBox ID="txtFlickrGroupId" runat="server" />
  </div>
+ <div class="dnnFormItem">
+  <dnn:label ID="lblFlickrUserId" runat="server" controlname="txtFlickrUserId" suffix=":" />
+  <asp:TextBox ID="txtFlickrUserId" runat="server" />
+ </div>
+ <div class="dnnFormItem">
+  <dnn:label ID="lblFlickrAlbumId" runat="server" controlname="txtFlickrAlbumId" suffix=":" />
+  <asp:TextBox ID="txtFlickrAlbumId" runat="server" />
+ </div>
+ <div class="dnnFormItem">
+  <dnn:label ID="lblIncludeInService" runat="server" controlname="chkIncludeInService" suffix=":" />
+  <asp:CheckBox ID="chkIncludeInService" runat="server" />
+ </div>
 </fieldset>
 

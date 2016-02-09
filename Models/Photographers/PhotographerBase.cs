@@ -2,30 +2,35 @@
 using System;
 using System.Runtime.Serialization;
 using DotNetNuke.ComponentModel.DataAnnotations;
-
-namespace Connect.DNN.Modules.FlickrGallery.Models.Photographers
+namespace Connect.FlickrGallery.Core.Models.Photographers
 {
     [TableName("Connect_FlickrGallery_Photographers")]
     [PrimaryKey("PhotographerId", AutoIncrement = true)]
     [DataContract]
     [Scope("ModuleId")]
-    public partial class PhotographerBase
-    {
+    public partial class PhotographerBase     {
 
-        #region " Public Properties "
-        [DataMember()]
+        #region .ctor
+        public PhotographerBase()
+        {
+            PhotographerId = -1;
+        }
+        #endregion
+
+        #region Properties
+        [DataMember]
         public int PhotographerId { get; set; }
-        [DataMember()]
+        [DataMember]
         public int ModuleId { get; set; }
-        [DataMember()]
+        [DataMember]
         public string FlickrId { get; set; }
-        [DataMember()]
+        [DataMember]
         public string OwnerName { get; set; }
-        [DataMember()]
+        [DataMember]
         public int? UserId { get; set; }
         #endregion
 
-        #region " Methods "
+        #region Methods
         public void ReadPhotographerBase(PhotographerBase photographer)
         {
             if (photographer.PhotographerId > -1)

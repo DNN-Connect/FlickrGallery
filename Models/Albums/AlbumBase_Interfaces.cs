@@ -7,27 +7,27 @@ using DotNetNuke.ComponentModel.DataAnnotations;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Tokens;
 
-namespace Connect.FlickrGallery.Core.Models.Photographers
+namespace Connect.FlickrGallery.Core.Models.Albums
 {
-    public partial class PhotographerBase : IHydratable, IPropertyAccess
+    public partial class AlbumBase : IHydratable, IPropertyAccess
     {
 
         #region IHydratable
 
         public virtual void Fill(IDataReader dr)
         {
-   PhotographerId = Convert.ToInt32(Null.SetNull(dr["PhotographerId"], PhotographerId));
+   AlbumId = Convert.ToInt32(Null.SetNull(dr["AlbumId"], AlbumId));
    ModuleId = Convert.ToInt32(Null.SetNull(dr["ModuleId"], ModuleId));
-   FlickrId = Convert.ToString(Null.SetNull(dr["FlickrId"], FlickrId));
-   OwnerName = Convert.ToString(Null.SetNull(dr["OwnerName"], OwnerName));
-   UserId = Convert.ToInt32(Null.SetNull(dr["UserId"], UserId));
+   PhotosetId = Convert.ToString(Null.SetNull(dr["PhotosetId"], PhotosetId));
+   Title = Convert.ToString(Null.SetNull(dr["Title"], Title));
+   PrimaryPhotoId = Convert.ToInt32(Null.SetNull(dr["PrimaryPhotoId"], PrimaryPhotoId));
         }
 
         [IgnoreColumn()]
         public int KeyID
         {
-            get { return PhotographerId; }
-            set { PhotographerId = value; }
+            get { return AlbumId; }
+            set { AlbumId = value; }
         }
         #endregion
 
@@ -36,20 +36,24 @@ namespace Connect.FlickrGallery.Core.Models.Photographers
         {
             switch (strPropertyName.ToLower())
             {
-    case "photographerid": // Int
-     return PhotographerId.ToString(strFormat, formatProvider);
+    case "albumid": // Int
+     return AlbumId.ToString(strFormat, formatProvider);
     case "moduleid": // Int
      return ModuleId.ToString(strFormat, formatProvider);
-    case "flickrid": // NVarChar
-     return PropertyAccess.FormatString(FlickrId, strFormat);
-    case "ownername": // NVarChar
-     return PropertyAccess.FormatString(OwnerName, strFormat);
-    case "userid": // Int
-     if (UserId == null)
+    case "photosetid": // VarChar
+     return PropertyAccess.FormatString(PhotosetId, strFormat);
+    case "title": // NVarChar
+     if (Title == null)
      {
          return "";
      };
-     return ((int)UserId).ToString(strFormat, formatProvider);
+     return PropertyAccess.FormatString(Title, strFormat);
+    case "primaryphotoid": // Int
+     if (PrimaryPhotoId == null)
+     {
+         return "";
+     };
+     return ((int)PrimaryPhotoId).ToString(strFormat, formatProvider);
                 default:
                     propertyNotFound = true;
                     break;

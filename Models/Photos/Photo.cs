@@ -2,33 +2,30 @@
 using System.Runtime.Serialization;
 using DotNetNuke.ComponentModel.DataAnnotations;
 
-namespace Connect.DNN.Modules.FlickrGallery.Models.Photos
+namespace Connect.FlickrGallery.Core.Models.Photos
 {
 
     [TableName("vw_Connect_FlickrGallery_Photos")]
     [PrimaryKey("PhotoId", AutoIncrement = true)]
     [DataContract]
-    [Scope("ModuleId")]
-    public partial class Photo : PhotoBase 
+    [Scope("ModuleId")]                
+    public partial class Photo  : PhotoBase 
     {
 
-        #region " Private Members "
-        #endregion
-
-        #region " Constructors "
+        #region .ctor
         public Photo()  : base() 
         {
         }
         #endregion
 
-        #region " Public Properties "
-        [DataMember()]
+        #region Properties
+        [DataMember]
         public string OwnerName { get; set; }
-        [DataMember()]
+        [DataMember]
         public string PhotographerFlickrId { get; set; }
         #endregion
 
-        #region " Public Methods "
+        #region Methods
         public PhotoBase GetPhotoBase()
         {
             PhotoBase res = new PhotoBase();

@@ -2,42 +2,47 @@
 using System;
 using System.Runtime.Serialization;
 using DotNetNuke.ComponentModel.DataAnnotations;
-
-namespace Connect.DNN.Modules.FlickrGallery.Models.Photos
+namespace Connect.FlickrGallery.Core.Models.Photos
 {
     [TableName("Connect_FlickrGallery_Photos")]
     [PrimaryKey("PhotoId", AutoIncrement = true)]
     [DataContract]
     [Scope("ModuleId")]
-    public partial class PhotoBase
-    {
+    public partial class PhotoBase     {
 
-        #region " Public Properties "
-        [DataMember()]
+        #region .ctor
+        public PhotoBase()
+        {
+            PhotoId = -1;
+        }
+        #endregion
+
+        #region Properties
+        [DataMember]
         public int PhotoId { get; set; }
-        [DataMember()]
+        [DataMember]
         public string FlickrId { get; set; }
-        [DataMember()]
+        [DataMember]
         public int ModuleId { get; set; }
-        [DataMember()]
+        [DataMember]
         public int PhotographerId { get; set; }
-        [DataMember()]
+        [DataMember]
         public string Title { get; set; }
-        [DataMember()]
+        [DataMember]
         public DateTime DateTaken { get; set; }
-        [DataMember()]
+        [DataMember]
         public DateTime? DateAddedToGroup { get; set; }
-        [DataMember()]
+        [DataMember]
         public string LargeSquareThumbnailUrl { get; set; }
-        [DataMember()]
+        [DataMember]
         public int? LargeHeight { get; set; }
-        [DataMember()]
+        [DataMember]
         public int? LargeWidth { get; set; }
-        [DataMember()]
+        [DataMember]
         public string LargeUrl { get; set; }
         #endregion
 
-        #region " Methods "
+        #region Methods
         public void ReadPhotoBase(PhotoBase photo)
         {
             if (photo.PhotoId > -1)

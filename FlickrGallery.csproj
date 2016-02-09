@@ -117,20 +117,22 @@
     <Compile Include="Common\FlickrGalleryService.cs" />
     <Compile Include="Common\FlickrGalleryWebPage.cs" />
     <Compile Include="Common\Globals.cs" />
+    <Compile Include="Common\ModuleSettings.cs" />
     <Compile Include="Common\RazorControl.cs" />
     <Compile Include="Common\RouteMapper.cs" />
-    <Compile Include="Common\Settings\ISettingsStore.cs" />
     <Compile Include="Common\ModuleBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Common\Settings\ModuleScopedSettings.cs" />
-    <Compile Include="Common\Settings\ModuleSettings.cs" />
-    <Compile Include="Common\Settings\StringBasedSettings.cs" />
-    <Compile Include="Controllers\PhotographersController.cs" />
-    <Compile Include="Controllers\PhotographersController_Services.cs" />
-    <Compile Include="Controllers\PhotosController.cs" />
+    <Compile Include="Common\Synchronization.cs" />
     <Compile Include="Controllers\PhotosController_Services.cs" />
     <Compile Include="Data\RepositoryImpl.cs" />
+    <Compile Include="Models\AlbumPhotos\AlbumPhoto.cs" />
+    <Compile Include="Models\AlbumPhotos\AlbumPhotoBase.cs" />
+    <Compile Include="Models\AlbumPhotos\AlbumPhotoBase_Interfaces.cs" />
+    <Compile Include="Models\Albums\Album.cs" />
+    <Compile Include="Models\Albums\AlbumBase.cs" />
+    <Compile Include="Models\Albums\AlbumBase_Interfaces.cs" />
+    <Compile Include="Models\Albums\Album_Interfaces.cs" />
     <Compile Include="Models\Photographers\Photographer.cs" />
     <Compile Include="Models\Photographers\PhotographerBase.cs" />
     <Compile Include="Models\Photographers\PhotographerBase_Interfaces.cs" />
@@ -143,8 +145,8 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\PhotoBaseRepository.cs" />
-    <Compile Include="Repositories\PhotographerBaseRepository.cs" />
+    <Compile Include="Repositories\AlbumPhotoRepository.cs" />
+    <Compile Include="Repositories\AlbumRepository.cs" />
     <Compile Include="Repositories\PhotographerRepository.cs" />
     <Compile Include="Repositories\PhotoRepository.cs" />
     <Compile Include="Settings.ascx.cs">
@@ -170,13 +172,22 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home.cshtml" />
+    <Content Include="Views\Default.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ServiceViews\GallerySegment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="_Installation\FlickrGallery.dnn" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Albums.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Album.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ServiceViews\AlbumSegment.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

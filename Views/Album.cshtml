@@ -1,10 +1,29 @@
 ﻿@inherits FlickrGalleryWebPage
 @using Connect.DNN.Modules.FlickrGallery.Common;
-@{ 
+@using Connect.FlickrGallery.Core.Repositories;
+@{
     var firstPage = new ContentPage(0);
+    var albumId = -1;
+    if (HttpContext.Current.Request.Params["AlbumId"] != null)
+    {
+     albumId = int.Parse(HttpContext.Current.Request.Params["AlbumId"]);
+    }
+    var album = AlbumRepository.Instance.GetAlbum(Dnn.Module.ModuleID, albumId);
 }
+
+<div class="cfg-album-title">
+ <h2>
+  @album.Title
+  <span style="float:right">
+   <a href="@DotNetNuke.Common.Globals.NavigateURL()" title="@Html.GetLocalizedString("Back")">
+    &times;
+   </a>
+  </span>
+ </h2>
+</div>
+
 <div id="lstGallery" class="cfg-gallery" itemscope itemtype="http://schema.org/ImageGallery">
- @RenderPage("ServiceViews/GallerySegment.cshtml", 0, Dnn)
+ @RenderPage("ServiceViews/AlbumSegment.cshtml", 0, Dnn)
 </div>
 
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
@@ -53,14 +72,14 @@
     if (window.innerHeight + $(window).scrollTop() > $('.scroll-next').offset().top) {
      $('.scroll-next').remove();
      page += 1;
-     galleryService.nextGallerySegment(page, function(data) {
+     galleryService.nextGallerySegment(page, 'album', function(data) {
       $('#lstGallery').append(data);
       initSwipe('.cfg-gallery figure');
      });
     }
    });
 
-   galleryService.list(function(data) {
+   galleryService.album(@albumId, function(data) {
     allSlides = data;
    });
 
@@ -76,7 +95,7 @@
   $('.scroll-next').click(function () {
    $('.scroll-next').remove();
    page += 1;
-   galleryService.nextGallerySegment(page, function (data) {
+   galleryService.nextGallerySegment(page, 'album', function (data) {
     $('#lstGallery').append(data);
     hookMoreLink();
    });

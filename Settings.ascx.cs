@@ -1,8 +1,7 @@
-﻿
-using System;
-using Connect.DNN.Modules.FlickrGallery.Common.Settings;
+﻿using System;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
+using Connect.DNN.Modules.FlickrGallery.Common;
 
 namespace Connect.DNN.Modules.FlickrGallery
 {
@@ -16,7 +15,7 @@ namespace Connect.DNN.Modules.FlickrGallery
             {
                 if (_settings == null)
                 {
-                    _settings = Common.Settings.ModuleSettings.GetSettings(ModuleConfiguration);
+                    _settings = Common.ModuleSettings.GetSettings(ModuleConfiguration);
                 }
                 return _settings;
             }
@@ -33,6 +32,9 @@ namespace Connect.DNN.Modules.FlickrGallery
                 {
                     txtFlickrApiKey.Text = ModSettings.FlickrApiKey;
                     txtFlickrGroupId.Text = ModSettings.FlickrGroupId;
+                    txtFlickrUserId.Text = ModSettings.FlickrUserId;
+                    txtFlickrAlbumId.Text = ModSettings.FlickrAlbumId;
+                    chkIncludeInService.Checked = ModSettings.IncludeInService;
                 }
             }
             catch (Exception exc) //Module failed to load
@@ -47,7 +49,10 @@ namespace Connect.DNN.Modules.FlickrGallery
             {
                 ModSettings.FlickrApiKey = txtFlickrApiKey.Text.Trim();
                 ModSettings.FlickrGroupId = txtFlickrGroupId.Text.Trim();
-                ModSettings.SaveSettings();
+                ModSettings.FlickrUserId = txtFlickrUserId.Text.Trim();
+                ModSettings.FlickrAlbumId = txtFlickrAlbumId.Text.Trim();
+                ModSettings.IncludeInService = chkIncludeInService.Checked;
+                ModSettings.SaveSettings(ModuleConfiguration);
             }
             catch (Exception exc) //Module failed to load
             {

@@ -1,20 +1,19 @@
 
 using System;
 using System.Data;
-using System.Globalization;
 using System.Xml.Serialization;
+
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Entities.Users;
 using DotNetNuke.Services.Tokens;
 
-namespace Connect.DNN.Modules.FlickrGallery.Models.Photos
+namespace Connect.FlickrGallery.Core.Models.Photos
 {
 
  [Serializable(), XmlRoot("Photo")]
  public partial class Photo
  {
 
-  #region " IHydratable Implementation "
+  #region IHydratable
   public override void Fill(IDataReader dr)
   {
    base.Fill(dr);
@@ -23,7 +22,7 @@ namespace Connect.DNN.Modules.FlickrGallery.Models.Photos
   }
   #endregion
 
-  #region " IPropertyAccess Implementation "
+  #region IPropertyAccess
   public override string GetProperty(string strPropertyName, string strFormat, System.Globalization.CultureInfo formatProvider, DotNetNuke.Entities.Users.UserInfo accessingUser, DotNetNuke.Services.Tokens.Scope accessLevel, ref bool propertyNotFound)
   {
    switch (strPropertyName.ToLower()) {
@@ -34,8 +33,6 @@ namespace Connect.DNN.Modules.FlickrGallery.Models.Photos
     default:
        return base.GetProperty(strPropertyName, strFormat, formatProvider, accessingUser, accessLevel, ref propertyNotFound);
    }
-
-         return Null.NullString;
   }
   #endregion
 

@@ -1,5 +1,4 @@
 ﻿using System.Web.WebPages;
-using Connect.DNN.Modules.FlickrGallery.Common.Settings;
 using DotNetNuke.Web.Razor;
 using DotNetNuke.Web.Razor.Helpers;
 
