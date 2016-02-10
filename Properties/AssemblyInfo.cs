@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FlickrGallery")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Flickr Gallery")]
+[assembly: AssemblyDescription("Flickr Gallery module for DNN Platform")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("DNN Connect Association")]
+[assembly: AssemblyCompany("DNN Connect")]
 [assembly: AssemblyProduct("FlickrGallery")]
-[assembly: AssemblyCopyright("Copyright © 2015")]
+[assembly: AssemblyCopyright("Copyright 2016 by DNN Connect")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -30,7 +30,7 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("02.00.00")]
-[assembly: AssemblyFileVersion("02.00.00")]
+[assembly: AssemblyVersion("2.1.0")]
+[assembly: AssemblyFileVersion("2.1.0")]
 
-[assembly: AssemblyInformationalVersion("02.00.00")]
+[assembly: AssemblyInformationalVersion("02.01.00")]
