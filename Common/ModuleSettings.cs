@@ -1,4 +1,4 @@
-﻿using DotNetNuke.Entities.Modules;
+using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Settings;
 
 namespace Connect.DNN.Modules.FlickrGallery.Common

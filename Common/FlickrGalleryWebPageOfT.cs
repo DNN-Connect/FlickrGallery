@@ -5,17 +5,17 @@ using System.Web;
 
 namespace Connect.DNN.Modules.FlickrGallery.Common
 {
-    public abstract class FlickrGalleryWebPage : DnnWebViewPage
+    public abstract class FlickrGalleryWebPage<TModel> : DnnWebViewPage<TModel>
     {
 
         public ContextHelper FlickrGalleryModuleContext { get; set; }
 
         public override void InitHelpers()
         {
-            Ajax = new AjaxHelper<object>(ViewContext, this);
-            Html = new DnnHtmlHelper<object>(ViewContext, this);
+            Ajax = new AjaxHelper<TModel>(ViewContext, this);
+            Html = new DnnHtmlHelper<TModel>(ViewContext, this);
             Url = new DnnUrlHelper(ViewContext);
-            Dnn = new DnnHelper<object>(ViewContext, this);
+            Dnn = new DnnHelper<TModel>(ViewContext, this);
             FlickrGalleryModuleContext = new ContextHelper(ViewContext);
         }
 

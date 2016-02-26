@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
@@ -8,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Flickr Gallery module for DNN Platform")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("DNN Connect")]
-[assembly: AssemblyProduct("FlickrGallery")]
+[assembly: AssemblyProduct("Connect.FlickrGallery.Core")]
 [assembly: AssemblyCopyright("Copyright 2016 by DNN Connect")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5ef01dd5-84a1-49f3-9232-067440288455")]
+[assembly: Guid("1ab38eaa-a1ca-400e-a41a-c58551a6b3a8")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -28,7 +29,8 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Revision and Build Numbers 
+// You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
+// [assembly: AssemblyVersion("2.1.1")]
 [assembly: AssemblyVersion("2.1.1")]
 [assembly: AssemblyFileVersion("2.1.1")]

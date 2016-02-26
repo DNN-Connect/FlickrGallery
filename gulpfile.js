@@ -1,6 +1,10 @@
 var gulp = require('gulp'),
+  browserify = require('browserify'),
+  source = require('vinyl-source-stream'),
+  buffer = require('vinyl-buffer'),
+  sourcemaps = require('gulp-sourcemaps'),
+  babelify = require('babelify'),
   msbuild = require('gulp-msbuild'),
-  browserify = require('gulp-browserify'),
   minifyCss = require('gulp-minify-css'),
   uglify = require('gulp-uglify'),
   assemblyInfo = require('gulp-dotnet-assembly-info'),
@@ -21,8 +25,25 @@ var gulp = require('gulp'),
     advanced: true
   });
 
+gulp.task('browserify', function() {
+  var b = browserify({
+    entries: ['js/src/main.jsx', 'js/src/common.js'],
+    debug: true
+  });
+  b.transform("babelify", {presets: ["es2015", "react"]});
+  return b.bundle()
+    .pipe(source('FlickrGallery.js'))
+    .pipe(buffer())
+    .pipe(sourcemaps.init({loadMaps: true}))
+        // Add transformation tasks to the pipeline here.
+        //.pipe(uglify())
+        .on('error', gutil.log)
+    //.pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('./js/'));
+});
+
 gulp.task('less', function() {
-  return gulp.src('css/src/less/module.less')
+  return gulp.src('css/src/module.less')
     .pipe(less({
       paths: [path.join(__dirname, 'less', 'includes')],
       plugins: [cleancss]
@@ -30,13 +51,9 @@ gulp.task('less', function() {
     .pipe(gulp.dest('.'));
 });
 
-gulp.task('css', ['less'], function() {
-  return gulp.src('css/src/module.css')
-    .pipe(gulp.dest('.'));
-});
-
 gulp.task('watch', function() {
-  gulp.watch('css/src/**/*.less', ['css']);
+  gulp.watch('js/src/**/*.js*', ['browserify']);
+  gulp.watch('css/src/**/*.less', ['less']);
 });
 
 gulp.task('assemblyInfo', function() {
@@ -56,7 +73,7 @@ gulp.task('assemblyInfo', function() {
 });
 
 gulp.task('build', ['assemblyInfo'], function() {
-  return gulp.src('./FlickrGallery.csproj')
+  return gulp.src('./Connect.FlickrGallery.csproj')
     .pipe(msbuild({
       toolsVersion: 14.0,
       targets: ['Clean', 'Build'],

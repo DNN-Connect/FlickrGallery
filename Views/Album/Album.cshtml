@@ -1,0 +1,69 @@
+@inherits FlickrGalleryWebPage<Album>
+@using Connect.DNN.Modules.FlickrGallery.Common;
+@using Connect.FlickrGallery.Core.Common;
+@using Connect.FlickrGallery.Core.Models.Albums;
+@using Connect.FlickrGallery.Core.Repositories;
+@{
+    FlickrGalleryModuleContext.AddReactJs();
+    FlickrGalleryModuleContext.AddModuleScript();
+    FlickrGalleryModuleContext.AddScript("photoswipe.js", "photoswipe", "4.0.8");
+    FlickrGalleryModuleContext.AddScript("photoswipe-ui-default.js", "photoswipe-ui-default", "4.0.8");
+    FlickrGalleryModuleContext.AddCss("photoswipe.css", "photoswipe", "4.0.8");
+    FlickrGalleryModuleContext.AddCss("default-skin.css");
+}
+
+<div class="cfg-album-title">
+ <h2>
+  @Model.Title
+  <span style="float:right">
+   <a href="@DotNetNuke.Common.Globals.NavigateURL()" title="@Dnn.LocalizeString("Back")">
+    &times;
+   </a>
+  </span>
+ </h2>
+</div>
+
+<div class="flickrGallery photoGallery"
+     data-moduleid="@Dnn.ModuleContext.ModuleId"
+     data-resources="@SerializedResources()"
+     data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(FlickrGalleryModuleContext.Security))"
+     data-viewtype="@(FlickrGalleryModuleContext.Settings.ViewType)"
+     data-albumid="@Model.AlbumId"
+     data-photos="@(Newtonsoft.Json.JsonConvert.SerializeObject(AlbumPhotoRepository.Instance.GetPage(Dnn.ModuleContext.ModuleId, Model.AlbumId, 0, 50)))"
+     data-list="@(Newtonsoft.Json.JsonConvert.SerializeObject(AlbumPhotoRepository.Instance.GetAlbumPhotosByAlbum(Model.AlbumId).OrderBy(p => p.DateTaken).ToPhotoSwipeList()))">
+</div>
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+ <div class="pswp__bg"></div>
+ <div class="pswp__scroll-wrap">
+  <div class="pswp__container">
+   <div class="pswp__item"></div>
+   <div class="pswp__item"></div>
+   <div class="pswp__item"></div>
+  </div>
+  <div class="pswp__ui pswp__ui--hidden">
+   <div class="pswp__top-bar">
+    <div class="pswp__counter"></div>
+    <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+    <button class="pswp__button pswp__button--share" title="Share"></button>
+    <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+    <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+    <div class="pswp__preloader">
+     <div class="pswp__preloader__icn">
+      <div class="pswp__preloader__cut">
+       <div class="pswp__preloader__donut"></div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+    <div class="pswp__share-tooltip"></div>
+   </div>
+   <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+   <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+   <div class="pswp__caption">
+    <div class="pswp__caption__center"></div>
+   </div>
+  </div>
+ </div>
+</div>

@@ -1,0 +1,30 @@
+@inherits FlickrGalleryWebPage
+@using Connect.DNN.Modules.FlickrGallery.Common;
+@{
+    FlickrGalleryModuleContext.AddReactJs();
+    FlickrGalleryModuleContext.AddModuleScript();
+}
+@{ 
+    var albums = Connect.FlickrGallery.Core.Repositories.AlbumRepository.Instance.GetAlbums(Dnn.ActiveModule.ModuleID);
+}
+
+<div class="flickrGallery"
+     data-moduleid="@Dnn.ModuleContext.ModuleId"
+     data-resources="@SerializedResources()"
+     data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(FlickrGalleryModuleContext.Security))"
+     data-viewtype="@(FlickrGalleryModuleContext.Settings.ViewType)">
+</div>
+
+<div class="cfg-albums">
+@foreach (var album in albums.OrderByDescending(a => a.Title))
+{
+<div class="cfg-album">
+  <a href="@Url.Action("Album", "Album", new { albumId = album.AlbumId })">
+   <img src="@album.LargeSquareThumbnailUrl" width="150" height="150" />
+  </a>
+  <span>@album.Title</span>
+</div>
+}
+</div>
+
+<div class="refreshButton" data-moduleid="@Dnn.ModuleContext.ModuleId"></div>

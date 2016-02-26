@@ -1,6 +1,6 @@
 {
   "name": "flickrgallery",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Flickr Gallery module for DNN Platform",
   "dnnModule": {
     "fullName": "Connect_FlickrGallery",
@@ -14,14 +14,14 @@
     },
     "module": {
       "packageName": "Connect_FlickrGallery",
-      "folderName": "Connect/FlickrGallery",
+      "folderName": "Mvc/Connect/FlickrGallery",
       "azureCompatible": "true",
-      "iconFile": "DesktopModules\\Connect\\FlickrGallery\\FlickrGallery.png"
+      "iconFile": "DesktopModules\\Mvc\\Connect\\FlickrGallery\\FlickrGallery.png"
     },
     "tempPath": "./package",
     "packagesPath": "./_Packages",
     "pathToAssemblies": "./bin",
-    "pathToScripts": "./_Installation/SQL2005",
+    "pathToScripts": "./_Installation/SQL",
     "pathToSupplementaryFiles": "./_Installation",
     "excludeFilter": [
       "_Development",
@@ -48,9 +48,12 @@
   },
   "homepage": "https://github.com/DNN-Connect/FlickrGallery#readme",
   "devDependencies": {
-    "browserify": "^12.0.1",
+    "alt": "^0.18.2",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "babelify": "^7.2.0",
+    "browserify": "^13.0.0",
     "gulp": "^3.9.0",
-    "gulp-browserify": "^0.5.1",
     "gulp-concat": "^2.6.0",
     "gulp-dnn-manifest": "^0.1.0",
     "gulp-dotnet-assembly-info": "^0.1.11",
@@ -62,11 +65,16 @@
     "gulp-plumber": "^1.0.1",
     "gulp-react": "^3.0.1",
     "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^1.5.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.4.1",
     "gulp-util": "^3.0.6",
     "gulp-zip": "^3.0.2",
     "less-plugin-clean-css": "^1.5.1",
     "merge2": "^0.3.6",
-    "path": "^0.12.7"
+    "react": "^0.13.3",
+    "react-router": "^2.0.0",
+    "react-tools": "^0.13.3",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
   }
 }

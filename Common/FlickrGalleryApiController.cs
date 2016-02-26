@@ -1,21 +1,24 @@
-﻿using DotNetNuke.Web.Api;
+using DotNetNuke.Web.Api;
+using System.Net;
+using System.Net.Http;
 
 namespace Connect.DNN.Modules.FlickrGallery.Common
 {
     public class FlickrGalleryApiController : DnnApiController
     {
-        private ModuleSettings _settings;
-        public ModuleSettings Settings
+        private ContextHelper _flickrgalleryModuleContext;
+        public ContextHelper FlickrGalleryModuleContext
         {
-            get
-            {
-                if (_settings == null)
-                {
-                    _settings = ModuleSettings.GetSettings(ActiveModule);
-                }
-                return _settings;
-            }
-            set { _settings = value; }
+            get { return _flickrgalleryModuleContext ?? (_flickrgalleryModuleContext = new ContextHelper(this)); }
+        }
+
+        public HttpResponseMessage ServiceError(string message) {
+            return Request.CreateResponse(HttpStatusCode.InternalServerError, message);
+        }
+
+        public HttpResponseMessage AccessViolation(string message)
+        {
+            return Request.CreateResponse(HttpStatusCode.Unauthorized, message);
         }
 
     }
