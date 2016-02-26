@@ -1,5 +1,4 @@
-var React = require("react"),
-    Service = require('./service.js'),
+var Service = require('./service.js'),
     PhotoGallery = require("./PhotoGallery/photo-gallery.jsx"),
     RefreshButton = require("./refresh-button.jsx");
 

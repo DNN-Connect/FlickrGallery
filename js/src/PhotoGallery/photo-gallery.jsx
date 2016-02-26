@@ -1,5 +1,4 @@
-var React = require("react"),
-    GalleryPhoto = require("./photo-gallery-photo.jsx");
+var GalleryPhoto = require("./photo-gallery-photo.jsx");
 
 module.exports = React.createClass({
 
