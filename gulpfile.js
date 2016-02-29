@@ -31,7 +31,12 @@ gulp.task('browserify', function() {
     debug: true
   });
   b.transform("babelify", {presets: ["es2015", "react"]});
+  b.external('react');
   return b.bundle()
+    .on('error', function(err){
+      console.log(err.message);
+      this.emit('end');
+    })
     .pipe(source('FlickrGallery.js'))
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))

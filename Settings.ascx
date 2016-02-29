@@ -7,6 +7,10 @@
   <asp:TextBox ID="txtFlickrApiKey" runat="server" />
  </div>
  <div class="dnnFormItem">
+  <dnn:Label ID="lblFlickrSharedSecret" runat="server" controlname="txtFlickrSharedSecret" suffix=":" />
+  <asp:TextBox ID="txtFlickrSharedSecret" runat="server" />
+ </div>
+ <div class="dnnFormItem">
   <dnn:label ID="lblFlickrGroupId" runat="server" controlname="txtFlickrGroupId" suffix=":" />
   <asp:TextBox ID="txtFlickrGroupId" runat="server" />
  </div>

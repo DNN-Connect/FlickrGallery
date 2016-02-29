@@ -2,6 +2,9 @@
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
 using Connect.DNN.Modules.FlickrGallery.Common;
+using FlickrNet;
+using DotNetNuke.Web.Mvc.Routing;
+using System.Web.Routing;
 
 namespace Connect.DNN.Modules.FlickrGallery
 {
@@ -31,6 +34,7 @@ namespace Connect.DNN.Modules.FlickrGallery
                 if (Page.IsPostBack == false)
                 {
                     txtFlickrApiKey.Text = ModSettings.FlickrApiKey;
+                    txtFlickrSharedSecret.Text = ModSettings.FlickrSharedSecret;
                     txtFlickrGroupId.Text = ModSettings.FlickrGroupId;
                     txtFlickrUserId.Text = ModSettings.FlickrUserId;
                     txtFlickrAlbumId.Text = ModSettings.FlickrAlbumId;
@@ -48,6 +52,7 @@ namespace Connect.DNN.Modules.FlickrGallery
             try
             {
                 ModSettings.FlickrApiKey = txtFlickrApiKey.Text.Trim();
+                ModSettings.FlickrSharedSecret = txtFlickrSharedSecret.Text.Trim();
                 ModSettings.FlickrGroupId = txtFlickrGroupId.Text.Trim();
                 ModSettings.FlickrUserId = txtFlickrUserId.Text.Trim();
                 ModSettings.FlickrAlbumId = txtFlickrAlbumId.Text.Trim();

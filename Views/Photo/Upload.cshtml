@@ -1,0 +1,29 @@
+@inherits FlickrGalleryWebPage<Connect.DNN.Modules.FlickrGallery.Controllers.PhotoController.SubmitPhotos>
+@using Connect.DNN.Modules.FlickrGallery.Common;
+@using Connect.FlickrGallery.Core.Repositories;
+@{
+    FlickrGalleryModuleContext.AddReactJs();
+    FlickrGalleryModuleContext.AddModuleScript();
+    FlickrGalleryModuleContext.AddCss("dropzone.min.css");
+    FlickrGalleryModuleContext.AddScript("dropzone.min.js");
+}
+
+<div class="flickrGallery"
+     data-moduleid="@Dnn.ModuleContext.ModuleId"
+     data-tabid="@Dnn.ModuleContext.TabId"
+     data-resources="@SerializedResources()"
+     data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(FlickrGalleryModuleContext.Security))"
+     data-viewtype="@(FlickrGalleryModuleContext.Settings.ViewType)">
+</div>
+
+<h2>Upload Photos</h2>
+
+<div class="flickrUpload" 
+     data-moduleid="@Dnn.ModuleContext.ModuleId"
+     data-albums="@(Newtonsoft.Json.JsonConvert.SerializeObject(AlbumRepository.Instance.GetAlbums(Dnn.ModuleContext.ModuleId).OrderBy(a => a.Title)))">
+</div>
+
+<div class="cfg-buttons">
+  <button type="submit" name="cancel" class="dnnSecondaryAction" id="cmdCancel">@Dnn.LocalizeString("Cancel")</button>
+  <button type="submit" name="save" class="dnnPrimaryAction" id="cmdSave">@Dnn.LocalizeString("Save")</button>
+</div>

@@ -1,6 +1,7 @@
 var Service = require('./service.js'),
     PhotoGallery = require("./PhotoGallery/photo-gallery.jsx"),
-    RefreshButton = require("./refresh-button.jsx");
+    RefreshButton = require("./refresh-button.jsx"),
+    Upload = require("./Upload/upload.jsx");
 
 (function($, window, document, undefined) {
 
@@ -16,6 +17,7 @@ var Service = require('./service.js'),
       $('.flickrGallery').each((i, el) => {
         this.modules[$(el).data('moduleid')] = {
           moduleId: $(el).data('moduleid'),
+          tabId: $(el).data('tabid'),
           resources: $(el).data('resources'),
           security: $(el).data('security'),
           viewType: $(el).data('viewtype'),
@@ -30,6 +32,10 @@ var Service = require('./service.js'),
       });
       $('.refreshButton').each((i, el) => {
         React.render(<RefreshButton module={this.modules[$(el).data('moduleid')]} />, el);
+      });
+      $('.flickrUpload').each((i, el) => {
+        React.render(<Upload module={this.modules[$(el).data('moduleid')]}
+                             albums={$(el).data('albums')} />, el);
       });
     }
 

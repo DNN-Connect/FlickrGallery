@@ -31,6 +31,24 @@ namespace Connect.DNN.Modules.FlickrGallery {
         protected global::System.Web.UI.WebControls.TextBox txtFlickrApiKey;
         
         /// <summary>
+        /// lblFlickrSharedSecret control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UserControl lblFlickrSharedSecret;
+        
+        /// <summary>
+        /// txtFlickrSharedSecret control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFlickrSharedSecret;
+        
+        /// <summary>
         /// lblFlickrGroupId control.
         /// </summary>
         /// <remarks>

@@ -8,6 +8,8 @@ namespace Connect.DNN.Modules.FlickrGallery.Common
         [ModuleSetting]
         public string FlickrApiKey { get; set; } = "";
         [ModuleSetting]
+        public string FlickrSharedSecret { get; set; } = "";
+        [ModuleSetting]
         public string FlickrGroupId { get; set; } = "";
         [ModuleSetting]
         public string FlickrUserId { get; set; } = "";
@@ -19,6 +21,10 @@ namespace Connect.DNN.Modules.FlickrGallery.Common
         public int ZoomSize { get; set; } = 800;
         [ModuleSetting]
         public bool IncludeInService { get; set; } = true;
+        [ModuleSetting]
+        public string OAuthAccessToken { get; set; } = "";
+        [ModuleSetting]
+        public string OAuthAccessTokenSecret { get; set; } = "";
 
         public ViewTypes ViewType { get; set; } = ViewTypes.None;
 

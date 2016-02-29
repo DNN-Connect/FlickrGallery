@@ -109,6 +109,230 @@ module.exports = React.createClass({
 });
 
 },{"./photo-gallery-photo.jsx":1}],3:[function(require,module,exports){
+"use strict";
+
+module.exports = React.createClass({
+  displayName: "exports",
+  getInitialState: function getInitialState() {
+    return {};
+  },
+  changed: function changed() {
+    var s = this.refs.albumDropdown.getDOMNode();
+    var albumName = '';
+    if (s.options[s.selectedIndex].value == "-1") {
+      albumName = this.refs.newAlbumName.getDOMNode().value;
+    } else {
+      albumName = s.options[s.selectedIndex].text;
+    }
+    this.props.setAlbumName(albumName);
+  },
+  render: function render() {
+    var options = this.props.albums.map(function (item) {
+      return React.createElement(
+        "option",
+        { value: item.AlbumId },
+        item.Title
+      );
+    });
+    return React.createElement(
+      "div",
+      null,
+      React.createElement(
+        "h3",
+        null,
+        "Album"
+      ),
+      React.createElement(
+        "div",
+        null,
+        React.createElement(
+          "select",
+          { className: "form-control", id: "SelectedAlbum",
+            ref: "albumDropdown", onChange: this.changed },
+          React.createElement(
+            "option",
+            { value: "-1" },
+            "New ..."
+          ),
+          options
+        )
+      ),
+      React.createElement(
+        "table",
+        { className: "cfg-table" },
+        React.createElement(
+          "tr",
+          null,
+          React.createElement(
+            "td",
+            { width: "100px;" },
+            React.createElement(
+              "strong",
+              null,
+              "New Album"
+            )
+          ),
+          React.createElement(
+            "td",
+            null,
+            React.createElement("input", { type: "text", className: "form-control", id: "NewAlbum",
+              ref: "newAlbumName", onChange: this.changed })
+          )
+        )
+      )
+    );
+  }
+});
+
+},{}],4:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var UploadedFile = require("./uploaded-file.jsx"),
+    AlbumSelect = require("./album-select.jsx");
+
+module.exports = React.createClass({
+  displayName: "exports",
+  getInitialState: function getInitialState() {
+    return {
+      uploadedFiles: [],
+      selectedAlbum: '',
+      albums: this.props.albums
+    };
+  },
+  fileUploaded: function fileUploaded(file, response) {
+    this.setState({
+      uploadedFiles: this.state.uploadedFiles.concat(response)
+    });
+  },
+  submitUploads: function submitUploads(e) {
+    e.preventDefault();
+    this.sendNextInQueue();
+  },
+  setAlbumName: function setAlbumName(name) {
+    this.setState({
+      selectedAlbum: name
+    });
+  },
+  sendNextInQueue: function sendNextInQueue() {
+    var _this = this;
+
+    var nextToSend = null;
+    var newList = [];
+    for (var i = 0; i < this.state.uploadedFiles.length; i++) {
+      var up = this.state.uploadedFiles[i];
+      if (nextToSend == null & !up.sent) {
+        nextToSend = up;
+        up.sending = true;
+      }
+      newList.push(up);
+    }
+    if (nextToSend != null) {
+      this.setState({
+        uploadedFiles: newList
+      });
+      this.props.module.service.sendFile(nextToSend, this.state.selectedAlbum, function (data) {
+        nextToSend.sending = false;
+        nextToSend.sent = true;
+        var newList2 = [];
+        for (var i = 0; i < _this.state.uploadedFiles.length; i++) {
+          newList2.push(_this.state.uploadedFiles[i].newName == nextToSend.newName ? nextToSend : _this.state.uploadedFiles[i]);
+        }
+        _this.setState({
+          uploadedFiles: newList2
+        });
+        _this.sendNextInQueue();
+      });
+    }
+  },
+  componentDidMount: function componentDidMount() {
+    var _this2 = this;
+
+    var that = this;
+    $(document).ready(function () {
+      Dropzone.autoDiscover = false;
+      Dropzone.options.flickrUploadDropzone = {
+        init: function init() {
+          this.on("success", that.fileUploaded);
+        }
+      };
+      $("#flickrUploadDropzone").dropzone({
+        acceptedFiles: '.jpg,.png',
+        url: _this2.props.module.service.baseServicepath + 'Photos/SaveUploadedFile',
+        headers: {
+          moduleId: _this2.props.module.moduleId,
+          tabId: _this2.props.module.tabId
+        },
+        dictDefaultMessage: _this2.props.module.resources.UploadMessage,
+        dictFallbackMessage: _this2.props.module.resources.UploadNotSupported,
+        parallelUploads: 1
+      });
+    });
+  },
+  render: function render() {
+    var _this3 = this;
+
+    var uploads = this.state.uploadedFiles.map(function (item) {
+      return React.createElement(UploadedFile, _extends({ upload: item, key: item.newName }, _this3.props));
+    });
+    var unsentUploads = false;
+    for (var i = 0; i < this.state.uploadedFiles.length; i++) {
+      if (!this.state.uploadedFiles[i].sent) {
+        unsentUploads = true;
+      };
+    }
+    var sendButton = unsentUploads ? React.createElement(
+      "a",
+      { href: "#", className: "dnnPrimaryAction", onClick: this.submitUploads },
+      "Submit"
+    ) : null;
+    var albumSelector = this.props.module.viewType == "User" ? React.createElement(AlbumSelect, _extends({ albums: this.state.albums, setAlbumName: this.setAlbumName }, this.props)) : null;
+    return React.createElement(
+      "div",
+      null,
+      React.createElement("div", { ref: "dropzone", id: "flickrUploadDropzone", className: "dropzone" }),
+      albumSelector,
+      React.createElement(
+        "h4",
+        null,
+        "Upload Files to ",
+        this.state.selectedAlbum
+      ),
+      uploads,
+      React.createElement("input", { type: "hidden", id: "UploadedFiles", value: JSON.stringify(this.state.uploadedFiles) }),
+      React.createElement(
+        "div",
+        { className: "cfg-buttons" },
+        sendButton
+      )
+    );
+  }
+});
+
+},{"./album-select.jsx":3,"./uploaded-file.jsx":5}],5:[function(require,module,exports){
+'use strict';
+
+module.exports = React.createClass({
+  displayName: 'exports',
+  getInitialState: function getInitialState() {
+    return {};
+  },
+  componentWillMount: function componentWillMount() {},
+  componentWillUnmount: function componentWillUnmount() {},
+  render: function render() {
+    var txt = this.props.upload.sending ? 'sending ...' : '';
+    return React.createElement(
+      'div',
+      null,
+      this.props.upload.fileName,
+      ' ',
+      txt
+    );
+  }
+});
+
+},{}],6:[function(require,module,exports){
 'use strict';
 
 function isInt(value) {
@@ -173,12 +397,13 @@ function pad(number) {
   return number;
 }
 
-},{}],4:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 "use strict";
 
 var Service = require('./service.js'),
     PhotoGallery = require("./PhotoGallery/photo-gallery.jsx"),
-    RefreshButton = require("./refresh-button.jsx");
+    RefreshButton = require("./refresh-button.jsx"),
+    Upload = require("./Upload/upload.jsx");
 
 (function ($, window, document, undefined) {
 
@@ -196,6 +421,7 @@ var Service = require('./service.js'),
       $('.flickrGallery').each(function (i, el) {
         _this.modules[$(el).data('moduleid')] = {
           moduleId: $(el).data('moduleid'),
+          tabId: $(el).data('tabid'),
           resources: $(el).data('resources'),
           security: $(el).data('security'),
           viewType: $(el).data('viewtype'),
@@ -211,11 +437,15 @@ var Service = require('./service.js'),
       $('.refreshButton').each(function (i, el) {
         React.render(React.createElement(RefreshButton, { module: _this.modules[$(el).data('moduleid')] }), el);
       });
+      $('.flickrUpload').each(function (i, el) {
+        React.render(React.createElement(Upload, { module: _this.modules[$(el).data('moduleid')],
+          albums: $(el).data('albums') }), el);
+      });
     }
   };
 })(jQuery, window, document);
 
-},{"./PhotoGallery/photo-gallery.jsx":2,"./refresh-button.jsx":5,"./service.js":6}],5:[function(require,module,exports){
+},{"./PhotoGallery/photo-gallery.jsx":2,"./Upload/upload.jsx":4,"./refresh-button.jsx":8,"./service.js":9}],8:[function(require,module,exports){
 "use strict";
 
 module.exports = React.createClass({
@@ -240,18 +470,18 @@ module.exports = React.createClass({
   }
 });
 
-},{}],6:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 module.exports = function ($, mid) {
     var moduleId = mid;
-    var baseServicepath = $.dnnSF(moduleId).getServiceRoot('Connect/FlickrGallery');
+    this.baseServicepath = $.dnnSF(moduleId).getServiceRoot('Connect/FlickrGallery');
 
     this.ajaxCall = function (type, controller, action, id, data, success, fail) {
         // showLoading();
         $.ajax({
             type: type,
-            url: baseServicepath + controller + '/' + action + (id != null ? '/' + id : ''),
+            url: this.baseServicepath + controller + '/' + action + (id != null ? '/' + id : ''),
             beforeSend: $.dnnSF(moduleId).setModuleHeaders,
             data: data
         }).done(function (retdata) {
@@ -273,7 +503,14 @@ module.exports = function ($, mid) {
     this.refresh = function (success, fail) {
         this.ajaxCall('POST', 'Synchronization', 'SyncModule', null, null, success, fail);
     };
+    this.sendFile = function (fileToSend, albumName, success, fail) {
+        this.ajaxCall('POST', 'Photos', 'Send', null, {
+            fileName: fileToSend.fileName,
+            newName: fileToSend.newName,
+            albumName: albumName
+        }, success, fail);
+    };
 };
 
-},{}]},{},[4,3])
+},{}]},{},[7,6])
 

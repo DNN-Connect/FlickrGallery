@@ -1,12 +1,12 @@
 module.exports = function($, mid) {
     var moduleId = mid;
-    var baseServicepath = $.dnnSF(moduleId).getServiceRoot('Connect/FlickrGallery');
+    this.baseServicepath = $.dnnSF(moduleId).getServiceRoot('Connect/FlickrGallery');
 
     this.ajaxCall = function(type, controller, action, id, data, success, fail) {
         // showLoading();
         $.ajax({
             type: type,
-            url: baseServicepath + controller + '/' + action + (id != null ? '/' + id : ''),
+            url: this.baseServicepath + controller + '/' + action + (id != null ? '/' + id : ''),
             beforeSend: $.dnnSF(moduleId).setModuleHeaders,
             data: data
         }).done(function(retdata) {
@@ -27,6 +27,13 @@ module.exports = function($, mid) {
     }
     this.refresh = function(success, fail) {
         this.ajaxCall('POST', 'Synchronization', 'SyncModule', null, null, success, fail);
+    }
+    this.sendFile = function(fileToSend, albumName, success, fail) {
+        this.ajaxCall('POST', 'Photos', 'Send', null, {
+            fileName: fileToSend.fileName,
+            newName: fileToSend.newName,
+            albumName: albumName
+        }, success, fail);
     }
 
 }
