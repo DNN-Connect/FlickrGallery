@@ -35,7 +35,8 @@ var Service = require('./service.js'),
       });
       $('.flickrUpload').each((i, el) => {
         React.render(<Upload module={this.modules[$(el).data('moduleid')]}
-                             albums={$(el).data('albums')} />, el);
+                             albums={$(el).data('albums')}
+                             returnUrl={$(el).data('returnurl')} />, el);
       });
     }
 

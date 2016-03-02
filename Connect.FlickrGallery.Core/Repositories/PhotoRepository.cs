@@ -45,7 +45,7 @@ namespace Connect.FlickrGallery.Core.Repositories
             using (var context = DataContext.Instance())
             {
                 return context.ExecuteQuery<Photo>(System.Data.CommandType.Text,
-                    "SELECT * FROM vw_Connect_FlickrGallery_Photos WHERE PhotographerId=@0",
+                    "SELECT * FROM {databaseOwner}{objectQualifier}vw_Connect_FlickrGallery_Photos WHERE PhotographerId=@0",
                     photographerId);
             }
         }

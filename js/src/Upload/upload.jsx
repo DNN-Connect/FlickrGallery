@@ -101,6 +101,9 @@ module.exports = React.createClass({
     var sendButton = unsentUploads ? (
       <a href="#" className="dnnPrimaryAction" onClick={this.submitUploads}>{this.props.module.resources.UploadToFlickr}</a>
       ) : null;
+    var returnButton = unsentUploads | this.state.uploadedFiles.length == 0 ? null : (
+      <a href={this.props.returnUrl} className="dnnPrimaryAction">{this.props.module.resources.Return}</a>
+      );
     var albumSelector = this.props.module.viewType == "User" ? 
                       <AlbumSelect albums={this.state.albums} setAlbumName={this.setAlbumName} {...this.props} /> : 
                       null;
@@ -113,7 +116,8 @@ module.exports = React.createClass({
        {uploads}
        <input type="hidden" id="UploadedFiles" value={JSON.stringify(this.state.uploadedFiles)} />
        <div className="cfg-buttons">
-         {sendButton}
+         <a href={this.props.returnUrl} className="dnnSecondaryAction">{this.props.module.resources.Cancel}</a>
+         {sendButton}{returnButton}
        </div>
       </div>
     );

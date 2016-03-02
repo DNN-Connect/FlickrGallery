@@ -299,6 +299,11 @@ module.exports = React.createClass({
       { href: "#", className: "dnnPrimaryAction", onClick: this.submitUploads },
       this.props.module.resources.UploadToFlickr
     ) : null;
+    var returnButton = unsentUploads | this.state.uploadedFiles.length == 0 ? null : React.createElement(
+      "a",
+      { href: this.props.returnUrl, className: "dnnPrimaryAction" },
+      this.props.module.resources.Return
+    );
     var albumSelector = this.props.module.viewType == "User" ? React.createElement(AlbumSelect, _extends({ albums: this.state.albums, setAlbumName: this.setAlbumName }, this.props)) : null;
     return React.createElement(
       "div",
@@ -321,7 +326,13 @@ module.exports = React.createClass({
       React.createElement(
         "div",
         { className: "cfg-buttons" },
-        sendButton
+        React.createElement(
+          "a",
+          { href: this.props.returnUrl, className: "dnnSecondaryAction" },
+          this.props.module.resources.Cancel
+        ),
+        sendButton,
+        returnButton
       )
     );
   }
@@ -456,7 +467,8 @@ var Service = require('./service.js'),
       });
       $('.flickrUpload').each(function (i, el) {
         React.render(React.createElement(Upload, { module: _this.modules[$(el).data('moduleid')],
-          albums: $(el).data('albums') }), el);
+          albums: $(el).data('albums'),
+          returnUrl: $(el).data('returnurl') }), el);
       });
     }
   };
@@ -468,17 +480,45 @@ var Service = require('./service.js'),
 module.exports = React.createClass({
   displayName: "exports",
   getInitialState: function getInitialState() {
-    return {};
+    return {
+      refreshing: false
+    };
   },
-  refresh: function refresh() {
-    this.props.module.service.refresh(function () {});
+  refresh: function refresh(e) {
+    var _this = this;
+
+    e.preventDefault();
+    if (this.state.refreshing) {
+      return;
+    }
+    if (confirm(this.props.module.resources.RefreshConfirm)) {
+      this.setState({
+        refreshing: true
+      });
+      this.props.module.service.refresh(function () {
+        _this.setState({
+          refreshing: false
+        });
+      });
+    }
   },
   render: function render() {
-    var btn = this.props.module.security.IsAdmin ? React.createElement(
-      "a",
-      { href: "#", className: "dnnSecondaryAction", onClick: this.refresh },
-      this.props.module.resources.Refresh
-    ) : null;
+    var btn = null;
+    if (this.props.module.security.IsAdmin) {
+      if (this.state.refreshing) {
+        btn = React.createElement(
+          "span",
+          { className: "dnnSecondaryAction disabled" },
+          this.props.module.resources.Refreshing
+        );
+      } else {
+        btn = React.createElement(
+          "a",
+          { href: "#", className: "dnnSecondaryAction", onClick: this.refresh },
+          this.props.module.resources.Refresh
+        );
+      }
+    }
     return btn;
   }
 });

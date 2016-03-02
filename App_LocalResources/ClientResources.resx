@@ -153,4 +153,16 @@
   <data name="ThisGroup" xml:space="preserve">
     <value>This Group</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Return</value>
+  </data>
+  <data name="RefreshConfirm" xml:space="preserve">
+    <value>Do you wish to refresh this module? Note this can take a few minutes.</value>
+  </data>
+  <data name="Refreshing" xml:space="preserve">
+    <value>Refreshing ...</value>
+  </data>
 </root>

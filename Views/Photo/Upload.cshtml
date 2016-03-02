@@ -20,9 +20,6 @@
 
 <div class="flickrUpload" 
      data-moduleid="@Dnn.ModuleContext.ModuleId"
-     data-albums="@(Newtonsoft.Json.JsonConvert.SerializeObject(AlbumRepository.Instance.GetAlbums(Dnn.ModuleContext.ModuleId).OrderBy(a => a.Title)))">
-</div>
-
-<div class="cfg-buttons">
- <a href="@Url.Action("Index", "Home")" class="dnnPrimaryAction">@Dnn.LocalizeString("Return")</a>
+     data-albums="@(Newtonsoft.Json.JsonConvert.SerializeObject(AlbumRepository.Instance.GetAlbums(Dnn.ModuleContext.ModuleId).OrderBy(a => a.Title)))"
+     data-returnurl="@Url.Action("Index", "Home")">
 </div>

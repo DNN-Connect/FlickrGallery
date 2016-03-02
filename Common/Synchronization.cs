@@ -209,7 +209,7 @@ namespace Connect.DNN.Modules.FlickrGallery.Common
             {
                 if (!flickrList.Contains(p.FlickrId))
                 {
-                    PhotoRepository.Instance.DeletePhoto(p);
+                    PhotoRepository.Instance.DeletePhoto(p.GetPhotoBase());
                     deleted += 1;
                 }
             }
