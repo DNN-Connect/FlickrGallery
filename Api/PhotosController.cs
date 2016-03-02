@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using DotNetNuke.Web.Api;
 
 namespace Connect.DNN.Modules.FlickrGallery.Api
 {
@@ -50,6 +51,7 @@ namespace Connect.DNN.Modules.FlickrGallery.Api
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [FlickrGalleryAuthorize(SecurityLevel = SecurityAccessLevel.Add)]
         public HttpResponseMessage SaveUploadedFile()
         {
@@ -78,6 +80,7 @@ namespace Connect.DNN.Modules.FlickrGallery.Api
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [FlickrGalleryAuthorize(SecurityLevel = SecurityAccessLevel.Add)]
         public HttpResponseMessage Send([FromBody]AddedFile data)
         {
@@ -90,18 +93,50 @@ namespace Connect.DNN.Modules.FlickrGallery.Api
                 flickr.OAuthAccessTokenSecret = FlickrGalleryModuleContext.Settings.OAuthAccessTokenSecret;
                 flickr.InstanceCacheDisabled = true;
                 var photoId = flickr.UploadPicture(path, data.fileName);
-                if (!string.IsNullOrEmpty(data.albumName))
+                Photo flickrPhoto = flickr.PeopleGetPhotos("me", PhotoSearchExtras.All, 1, 10).FirstOrDefault(p => p.PhotoId == photoId);
+                Connect.FlickrGallery.Core.Models.Photos.PhotoBase modulePhoto = null;
+                if (flickrPhoto != null)
                 {
-                    var album = AlbumRepository.Instance.GetAlbums(ActiveModule.ModuleID).FirstOrDefault(a => a.Title == data.albumName);
-                    if (album == null)
+                    modulePhoto = Synchronization.AddPhoto(ActiveModule.ModuleID, flickrPhoto);
+                }
+                if (photoId != null)
+                {
+                    switch (FlickrGalleryModuleContext.Settings.ViewType)
                     {
-                        var newSet = flickr.PhotosetsCreate(data.albumName, photoId);
-                        var a = new AlbumBase() { PhotosetId = newSet.PhotosetId, ModuleId = ActiveModule.ModuleID, Title = newSet.Title };
-                        AlbumRepository.Instance.AddAlbum(ref a);
-                    }
-                    else
-                    {
-                        flickr.PhotosetsAddPhoto(album.PhotosetId, photoId);
+                        case ModuleSettings.ViewTypes.Album:
+                            break;
+                        case ModuleSettings.ViewTypes.Group:
+                            if (!string.IsNullOrEmpty(FlickrGalleryModuleContext.Settings.FlickrGroupId))
+                            {
+                                flickr.GroupsPoolsAdd(photoId, FlickrGalleryModuleContext.Settings.FlickrGroupId);
+                            }
+                            break;
+                        case ModuleSettings.ViewTypes.None:
+                            break;
+                        case ModuleSettings.ViewTypes.User:
+                            if (!string.IsNullOrEmpty(data.albumName))
+                            {
+                                var album = AlbumRepository.Instance.GetAlbums(ActiveModule.ModuleID).FirstOrDefault(a => a.Title == data.albumName);
+                                if (album == null)
+                                {
+                                    var newSet = flickr.PhotosetsCreate(data.albumName, photoId);
+                                    if (flickrPhoto != null)
+                                    {
+                                        var a = new AlbumBase() { ModuleId = ActiveModule.ModuleID, PhotosetId = newSet.PhotosetId, PrimaryPhotoId = modulePhoto.PhotoId, Title = data.albumName };
+                                        AlbumRepository.Instance.AddAlbum(ref a);
+                                        AlbumPhotoRepository.Instance.SetAlbumPhoto(a.AlbumId, modulePhoto.PhotoId);
+                                    }
+                                }
+                                else
+                                {
+                                    flickr.PhotosetsAddPhoto(album.PhotosetId, photoId);
+                                    if (flickrPhoto != null)
+                                    {
+                                        AlbumPhotoRepository.Instance.SetAlbumPhoto(album.AlbumId, modulePhoto.PhotoId);
+                                    }
+                                }
+                            }
+                            break;
                     }
                 }
                 return Request.CreateResponse(HttpStatusCode.OK, photoId);

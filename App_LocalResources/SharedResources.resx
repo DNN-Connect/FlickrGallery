@@ -123,4 +123,16 @@
   <data name="Refresh.Text" xml:space="preserve">
     <value>Refresh</value>
   </data>
+  <data name="RequestToken.Text" xml:space="preserve">
+    <value>Request Flickr Token</value>
+  </data>
+  <data name="Return.Text" xml:space="preserve">
+    <value>Return</value>
+  </data>
+  <data name="Upload.Text" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="UploadPhotos.Text" xml:space="preserve">
+    <value>Upload Photos</value>
+  </data>
 </root>

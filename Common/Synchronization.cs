@@ -12,6 +12,41 @@ namespace Connect.DNN.Modules.FlickrGallery.Common
     public class Synchronization
     {
 
+        public static Connect.FlickrGallery.Core.Models.Photos.PhotoBase AddPhoto(int moduleId, Photo flickrPhoto)
+        {
+            Dictionary<string, Photographer> photographers = PhotographerRepository.Instance.GetPhotographersDictionary(moduleId);
+            if (!photographers.ContainsKey(flickrPhoto.UserId))
+            {
+                PhotographerBase ph = new PhotographerBase();
+                ph.ModuleId = moduleId;
+                ph.FlickrId = flickrPhoto.UserId;
+                ph.OwnerName = flickrPhoto.OwnerName;
+                // todo: check if they are a user
+                PhotographerRepository.Instance.AddPhotographer(ref ph);
+                return AddPhoto(moduleId, ph.PhotographerId, flickrPhoto);
+            }
+            else
+            {
+                return AddPhoto(moduleId, photographers[flickrPhoto.UserId].PhotographerId, flickrPhoto);
+            }
+        }
+
+        public static Connect.FlickrGallery.Core.Models.Photos.PhotoBase AddPhoto(int moduleId, int photographerId, Photo flickrPhoto)
+        {
+            Connect.FlickrGallery.Core.Models.Photos.PhotoBase p = new Connect.FlickrGallery.Core.Models.Photos.PhotoBase();
+            p.ModuleId = moduleId;
+            p.FlickrId = flickrPhoto.PhotoId;
+            p.PhotographerId = photographerId;
+            p.DateAddedToGroup = flickrPhoto.DateAddedToGroup;
+            p.DateTaken = flickrPhoto.DateTaken;
+            p.LargeHeight = flickrPhoto.LargeHeight;
+            p.LargeUrl = flickrPhoto.LargeUrl;
+            p.LargeWidth = flickrPhoto.LargeWidth;
+            p.LargeSquareThumbnailUrl = flickrPhoto.LargeSquareThumbnailUrl;
+            PhotoRepository.Instance.AddPhoto(ref p);
+            return p;
+        }
+
         public static string SyncUser(ModuleSettings settings, int moduleId)
         {
             var log = new StringBuilder();

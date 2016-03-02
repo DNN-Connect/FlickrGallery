@@ -29,11 +29,18 @@
  }
 </div>
 
-<a href="@Url.Action("Upload", "Photo")">Upload Photos</a>
-<a href="@Url.Action("FlickrAuth", "Home")">Request Auth token</a>
+<div class="cfg-buttons">
+ @if (FlickrGalleryModuleContext.Settings.OAuthAccessToken != "" & FlickrGalleryModuleContext.Security.CanAdd)
+ {
+ <a href="@Url.Action("Upload", "Photo")" class="dnnSecondaryAction">@Dnn.LocalizeString("Upload")</a>
+ }
+ @if (FlickrGalleryModuleContext.Settings.FlickrSharedSecret != "" & FlickrGalleryModuleContext.Security.IsAdmin)
+ {
+ <a href="@Url.Action("FlickrAuth", "Home")" class="dnnSecondaryAction">@Dnn.LocalizeString("RequestToken")</a>
+ }
+ <span class="refreshButton" data-moduleid="@Dnn.ModuleContext.ModuleId"></span>
+</div>
 
-<div class="refreshButton" data-moduleid="@Dnn.ModuleContext.ModuleId"></div>
 
-<div class="addAlbumButton" data-moduleid="@Dnn.ModuleContext.ModuleId"></div>
 
 

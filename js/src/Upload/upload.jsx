@@ -4,9 +4,16 @@ var UploadedFile = require("./uploaded-file.jsx"),
 module.exports = React.createClass({
 
   getInitialState() {
+    var album = '';
+    if (this.props.module.viewType == "Group") {
+      album = this.props.module.resources.ThisGroup
+    }
+    if (this.props.module.viewType == "Album") {
+      album = this.props.module.resources.ThisAlbum
+    }
     return {
       uploadedFiles: [],
-      selectedAlbum: '',
+      selectedAlbum: album,
       albums: this.props.albums
     }
   },
@@ -72,7 +79,8 @@ module.exports = React.createClass({
         url: this.props.module.service.baseServicepath + 'Photos/SaveUploadedFile',
         headers: { 
           moduleId: this.props.module.moduleId,
-          tabId: this.props.module.tabId
+          tabId: this.props.module.tabId,
+          RequestVerificationToken: $('[name="__RequestVerificationToken"]').val()
         },
         dictDefaultMessage: this.props.module.resources.UploadMessage,
         dictFallbackMessage: this.props.module.resources.UploadNotSupported,
@@ -91,7 +99,7 @@ module.exports = React.createClass({
       if (!this.state.uploadedFiles[i].sent) { unsentUploads=true };
     }
     var sendButton = unsentUploads ? (
-      <a href="#" className="dnnPrimaryAction" onClick={this.submitUploads}>Submit</a>
+      <a href="#" className="dnnPrimaryAction" onClick={this.submitUploads}>{this.props.module.resources.UploadToFlickr}</a>
       ) : null;
     var albumSelector = this.props.module.viewType == "User" ? 
                       <AlbumSelect albums={this.state.albums} setAlbumName={this.setAlbumName} {...this.props} /> : 
@@ -101,7 +109,7 @@ module.exports = React.createClass({
        <div ref="dropzone" id="flickrUploadDropzone" className="dropzone">
        </div>
        {albumSelector}
-       <h4>Upload Files to {this.state.selectedAlbum}</h4>
+       <p><strong>{this.props.module.resources.UploadTo} {this.state.selectedAlbum}</strong></p>
        {uploads}
        <input type="hidden" id="UploadedFiles" value={JSON.stringify(this.state.uploadedFiles)} />
        <div className="cfg-buttons">

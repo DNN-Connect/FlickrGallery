@@ -21,19 +21,19 @@ module.exports = React.createClass({
       return <option value={item.AlbumId}>{item.Title}</option>
     });
     return (
-      <div>
-       <h3>Album</h3>
+      <div className="cfg-album-selector">
+       <p><strong>{this.props.module.resources.Album}</strong></p>
        <div>
        <select className="form-control" id="SelectedAlbum" 
                ref="albumDropdown" onChange={this.changed}>
-         <option value="-1">New ...</option>
+         <option value="-1">{this.props.module.resources.New}</option>
          {options}
        </select>
        </div>
        <table className="cfg-table">
        <tr>
         <td width="100px;">
-         <strong>New Album</strong>
+         <strong>{this.props.module.resources.NewAlbum}</strong>
         </td>
         <td>
           <input type="text" className="form-control" id="NewAlbum" 

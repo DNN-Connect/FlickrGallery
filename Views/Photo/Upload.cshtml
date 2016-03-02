@@ -1,4 +1,4 @@
-@inherits FlickrGalleryWebPage<Connect.DNN.Modules.FlickrGallery.Controllers.PhotoController.SubmitPhotos>
+@inherits FlickrGalleryWebPage
 @using Connect.DNN.Modules.FlickrGallery.Common;
 @using Connect.FlickrGallery.Core.Repositories;
 @{
@@ -16,7 +16,7 @@
      data-viewtype="@(FlickrGalleryModuleContext.Settings.ViewType)">
 </div>
 
-<h2>Upload Photos</h2>
+<h2>@Dnn.LocalizeString("UploadPhotos")</h2>
 
 <div class="flickrUpload" 
      data-moduleid="@Dnn.ModuleContext.ModuleId"
@@ -24,6 +24,5 @@
 </div>
 
 <div class="cfg-buttons">
-  <button type="submit" name="cancel" class="dnnSecondaryAction" id="cmdCancel">@Dnn.LocalizeString("Cancel")</button>
-  <button type="submit" name="save" class="dnnPrimaryAction" id="cmdSave">@Dnn.LocalizeString("Save")</button>
+ <a href="@Url.Action("Index", "Home")" class="dnnPrimaryAction">@Dnn.LocalizeString("Return")</a>
 </div>

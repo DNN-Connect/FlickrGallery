@@ -12,9 +12,7 @@ module.exports = React.createClass({
 
   render() {
     var btn = this.props.module.security.IsAdmin ? (
-      <div className="cfg-buttons">
-       <a href="#" className="dnnSecondaryAction" onClick={this.refresh}>Refresh</a>
-      </div>
+       <a href="#" className="dnnSecondaryAction" onClick={this.refresh}>{this.props.module.resources.Refresh}</a>
       ) : null;
     return btn;
   }

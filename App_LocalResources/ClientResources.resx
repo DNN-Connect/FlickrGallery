@@ -117,13 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Album" xml:space="preserve">
+    <value>Album</value>
+  </data>
   <data name="LoadMore" xml:space="preserve">
     <value>Load more ...</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>New ...</value>
+  </data>
+  <data name="NewAlbum" xml:space="preserve">
+    <value>New Album</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="sending" xml:space="preserve">
+    <value>sending ...</value>
   </data>
   <data name="UploadMessage" xml:space="preserve">
     <value>Upload your photos by dropping them here or clicking on this space</value>
   </data>
   <data name="UploadNotSupported" xml:space="preserve">
     <value>Your browser is not supported for multifile upload</value>
+  </data>
+  <data name="UploadTo" xml:space="preserve">
+    <value>Upload photos to</value>
+  </data>
+  <data name="UploadToFlickr" xml:space="preserve">
+    <value>Upload to Flickr</value>
+  </data>
+  <data name="ThisAlbum" xml:space="preserve">
+    <value>This Album</value>
+  </data>
+  <data name="ThisGroup" xml:space="preserve">
+    <value>This Group</value>
   </data>
 </root>

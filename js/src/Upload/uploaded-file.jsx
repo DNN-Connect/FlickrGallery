@@ -12,9 +12,9 @@ module.exports = React.createClass({
   },
 
   render() {
-    var txt = this.props.upload.sending ? 'sending ...' : '';
+    var txt = this.props.upload.sending ? this.props.module.resources.sending : '';
     return (
-      <div>{this.props.upload.fileName} {txt}</div>
+      <div className="cfg-uploaded-file">{this.props.upload.fileName} {txt}</div>
     );
   }
 

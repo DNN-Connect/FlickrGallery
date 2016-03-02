@@ -136,11 +136,15 @@ module.exports = React.createClass({
     });
     return React.createElement(
       "div",
-      null,
+      { className: "cfg-album-selector" },
       React.createElement(
-        "h3",
+        "p",
         null,
-        "Album"
+        React.createElement(
+          "strong",
+          null,
+          this.props.module.resources.Album
+        )
       ),
       React.createElement(
         "div",
@@ -152,7 +156,7 @@ module.exports = React.createClass({
           React.createElement(
             "option",
             { value: "-1" },
-            "New ..."
+            this.props.module.resources.New
           ),
           options
         )
@@ -169,7 +173,7 @@ module.exports = React.createClass({
             React.createElement(
               "strong",
               null,
-              "New Album"
+              this.props.module.resources.NewAlbum
             )
           ),
           React.createElement(
@@ -195,9 +199,16 @@ var UploadedFile = require("./uploaded-file.jsx"),
 module.exports = React.createClass({
   displayName: "exports",
   getInitialState: function getInitialState() {
+    var album = '';
+    if (this.props.module.viewType == "Group") {
+      album = this.props.module.resources.ThisGroup;
+    }
+    if (this.props.module.viewType == "Album") {
+      album = this.props.module.resources.ThisAlbum;
+    }
     return {
       uploadedFiles: [],
-      selectedAlbum: '',
+      selectedAlbum: album,
       albums: this.props.albums
     };
   },
@@ -262,7 +273,8 @@ module.exports = React.createClass({
         url: _this2.props.module.service.baseServicepath + 'Photos/SaveUploadedFile',
         headers: {
           moduleId: _this2.props.module.moduleId,
-          tabId: _this2.props.module.tabId
+          tabId: _this2.props.module.tabId,
+          RequestVerificationToken: $('[name="__RequestVerificationToken"]').val()
         },
         dictDefaultMessage: _this2.props.module.resources.UploadMessage,
         dictFallbackMessage: _this2.props.module.resources.UploadNotSupported,
@@ -285,7 +297,7 @@ module.exports = React.createClass({
     var sendButton = unsentUploads ? React.createElement(
       "a",
       { href: "#", className: "dnnPrimaryAction", onClick: this.submitUploads },
-      "Submit"
+      this.props.module.resources.UploadToFlickr
     ) : null;
     var albumSelector = this.props.module.viewType == "User" ? React.createElement(AlbumSelect, _extends({ albums: this.state.albums, setAlbumName: this.setAlbumName }, this.props)) : null;
     return React.createElement(
@@ -294,10 +306,15 @@ module.exports = React.createClass({
       React.createElement("div", { ref: "dropzone", id: "flickrUploadDropzone", className: "dropzone" }),
       albumSelector,
       React.createElement(
-        "h4",
+        "p",
         null,
-        "Upload Files to ",
-        this.state.selectedAlbum
+        React.createElement(
+          "strong",
+          null,
+          this.props.module.resources.UploadTo,
+          " ",
+          this.state.selectedAlbum
+        )
       ),
       uploads,
       React.createElement("input", { type: "hidden", id: "UploadedFiles", value: JSON.stringify(this.state.uploadedFiles) }),
@@ -311,22 +328,22 @@ module.exports = React.createClass({
 });
 
 },{"./album-select.jsx":3,"./uploaded-file.jsx":5}],5:[function(require,module,exports){
-'use strict';
+"use strict";
 
 module.exports = React.createClass({
-  displayName: 'exports',
+  displayName: "exports",
   getInitialState: function getInitialState() {
     return {};
   },
   componentWillMount: function componentWillMount() {},
   componentWillUnmount: function componentWillUnmount() {},
   render: function render() {
-    var txt = this.props.upload.sending ? 'sending ...' : '';
+    var txt = this.props.upload.sending ? this.props.module.resources.sending : '';
     return React.createElement(
-      'div',
-      null,
+      "div",
+      { className: "cfg-uploaded-file" },
       this.props.upload.fileName,
-      ' ',
+      " ",
       txt
     );
   }
@@ -458,13 +475,9 @@ module.exports = React.createClass({
   },
   render: function render() {
     var btn = this.props.module.security.IsAdmin ? React.createElement(
-      "div",
-      { className: "cfg-buttons" },
-      React.createElement(
-        "a",
-        { href: "#", className: "dnnSecondaryAction", onClick: this.refresh },
-        "Refresh"
-      )
+      "a",
+      { href: "#", className: "dnnSecondaryAction", onClick: this.refresh },
+      this.props.module.resources.Refresh
     ) : null;
     return btn;
   }
