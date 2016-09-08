@@ -346,8 +346,6 @@ module.exports = React.createClass({
   getInitialState: function getInitialState() {
     return {};
   },
-  componentWillMount: function componentWillMount() {},
-  componentWillUnmount: function componentWillUnmount() {},
   render: function render() {
     var txt = this.props.upload.sending ? this.props.module.resources.sending : '';
     return React.createElement(

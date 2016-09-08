@@ -5,12 +5,6 @@ module.exports = React.createClass({
     }
   },
 
-  componentWillMount() {
-  },
-  
-  componentWillUnmount() {
-  },
-
   render() {
     var txt = this.props.upload.sending ? this.props.module.resources.sending : '';
     return (

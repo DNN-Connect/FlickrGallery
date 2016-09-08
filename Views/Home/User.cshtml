@@ -3,8 +3,6 @@
 @{
     FlickrGalleryModuleContext.AddReactJs();
     FlickrGalleryModuleContext.AddModuleScript();
-    FlickrGalleryModuleContext.AddCss("bootstrap.min.css");
-    FlickrGalleryModuleContext.AddScript("bootstrap.min.js");
 }
 @{
     var albums = Connect.FlickrGallery.Core.Repositories.AlbumRepository.Instance.GetAlbums(Dnn.ActiveModule.ModuleID);
