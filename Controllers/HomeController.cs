@@ -17,10 +17,12 @@ namespace Connect.DNN.Modules.FlickrGallery.Controllers
                 case ModuleSettings.ViewTypes.Album:
                     return View();
                 case ModuleSettings.ViewTypes.Group:
+                    DotNetNuke.Framework.ServicesFramework.Instance.RequestAjaxAntiForgerySupport();
                     return View("Group");
                 case ModuleSettings.ViewTypes.None:
                     return View();
                 case ModuleSettings.ViewTypes.User:
+                    DotNetNuke.Framework.ServicesFramework.Instance.RequestAjaxAntiForgerySupport();
                     return View("User");
             }
             return View();

@@ -9,6 +9,7 @@ namespace Connect.DNN.Modules.FlickrGallery.Controllers
         [FlickrGalleryAuthorize(SecurityLevel = SecurityAccessLevel.Add)]
         public ActionResult Upload()
         {
+            DotNetNuke.Framework.ServicesFramework.Instance.RequestAjaxAntiForgerySupport();
             return View();
         }
 

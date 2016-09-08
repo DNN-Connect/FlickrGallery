@@ -80,6 +80,7 @@ namespace Connect.DNN.Modules.FlickrGallery.Common
         }
         public void AddModuleScript()
         {
+            DotNetNuke.Framework.JavaScriptLibraries.JavaScript.RequestRegistration(DotNetNuke.Framework.JavaScriptLibraries.CommonJs.DnnPlugins);
             DotNetNuke.Framework.ServicesFramework.Instance.RequestAjaxScriptSupport();
             AddScript("FlickrGallery.js");
         }
