@@ -1,0 +1,55 @@
+{
+  "projectType": "module",
+  "name": "FlickrGallery",
+  "friendlyName": "Flickr Gallery",
+  "description": "DNN Connect Flickr Gallery module",
+  "packageName": "Connect_FlickrGallery",
+  "folder": "MVC/Connect/FlickrGallery",
+  "iconFile": "DesktopModules\\MVC\\Connect\\FlickrGallery\\img\\Flickr.png",
+  "module": {
+    "azureCompatible": "true",
+    "moduleName": "Connect_FlickrGallery",
+    "foldername": "Connect/FlickrGallery",
+    "moduleDefinitions": [
+      {
+        "definitionName": "Connect_FlickrGallery",
+        "friendlyName": "FlickrGallery",
+        "defaultCacheTime": 0,
+        "moduleControls": [
+          {
+            "controlSrc": "Connect.DNN.Modules.FlickrGallery.Controllers/Home/Index.mvc",
+            "supportsPartialRendering": "False",
+            "controlTitle": "",
+            "controlType": "View",
+            "viewOrder": 0
+          },
+          {
+            "controlKey": "Settings",
+            "controlSrc": "DesktopModules/MVC/Connect/FlickrGallery/Settings.ascx",
+            "supportsPartialRendering": "False",
+            "controlTitle": "FlickrGallery Module Settings",
+            "controlType": "Edit",
+            "viewOrder": 1
+          }
+        ],
+        "permissions": [
+          {
+            "code": "Connect_FlickrGallery_MODULE",
+            "key": "ADD",
+            "name": "Add Photos"
+          }
+        ]
+      }
+    ]
+  },
+  "pathsAndFiles": {
+    "pathToScripts": "./Server/SqlScripts",
+    "assemblies": [
+      "Connect.DNN.Modules.FlickrGallery.dll",
+      "Connect.FlickrGallery.Core.dll",
+      "FlickrNet.dll"
+    ],
+    "excludeFilter": ["FlickrGallery/bin/", "FlickrGallery/obj/"],
+    "zipName": "Connect.FlickrGallery"
+  }
+}
