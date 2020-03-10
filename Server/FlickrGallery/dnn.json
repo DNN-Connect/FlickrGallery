@@ -3,7 +3,7 @@
   "name": "FlickrGallery",
   "friendlyName": "Flickr Gallery",
   "description": "DNN Connect Flickr Gallery module",
-  "packageName": "Connect_FlickrGallery",
+  "packageName": "FlickrGallery",
   "folder": "MVC/Connect/FlickrGallery",
   "iconFile": "DesktopModules\\MVC\\Connect\\FlickrGallery\\img\\Flickr.png",
   "module": {
@@ -12,8 +12,8 @@
     "foldername": "Connect/FlickrGallery",
     "moduleDefinitions": [
       {
-        "definitionName": "Connect_FlickrGallery",
-        "friendlyName": "FlickrGallery",
+        "definitionName": "Flickr Gallery",
+        "friendlyName": "Flickr Gallery",
         "defaultCacheTime": 0,
         "moduleControls": [
           {
