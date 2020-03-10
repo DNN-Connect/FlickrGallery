@@ -1,6 +1,6 @@
 {
   "name": "flickrgallery",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Flickr Gallery module for DNN Platform",
   "dnn": {
     "projectFolders": [
