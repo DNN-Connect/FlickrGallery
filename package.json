@@ -49,7 +49,7 @@
   "scripts": {
     "build": "set NODE_ENV=production&&webpack -p --config Client/webpack.config.js",
     "watch": "webpack --config Client/webpack.config.js --progress --colors --watch",
-    "watch-js": "node BuildSupport/watch.js"
+    "watch-js": "node Build/watch.js"
   },
   "repository": {
     "type": "git",
