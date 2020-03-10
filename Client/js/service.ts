@@ -1,13 +1,16 @@
-module.exports = function($, mid) {
-    var moduleId = mid;
-    this.baseServicepath = $.dnnSF(moduleId).getServiceRoot('Connect/FlickrGallery');
+export default class DataService {
+    private moduleId: number = -1;
+    public baseServicepath = ($ as any).dnnSF(this.moduleId).getServiceRoot('Connect/FlickrGallery');
+    constructor(mid: number) {
+        this.moduleId = mid;
+    };
 
-    this.ajaxCall = function(type, controller, action, id, data, success, fail) {
+    private ajaxCall(type: string, controller: string, action: string, id: any, data: any, success?: Function, fail?: Function): void {
         // showLoading();
         $.ajax({
             type: type,
             url: this.baseServicepath + controller + '/' + action + (id != null ? '/' + id : ''),
-            beforeSend: $.dnnSF(moduleId).setModuleHeaders,
+            beforeSend: ($ as any).dnnSF(this.moduleId).setModuleHeaders,
             data: data
         }).done(function(retdata) {
             // hideLoading();
@@ -22,18 +25,19 @@ module.exports = function($, mid) {
         });
     }
 
-    this.nextGallerySegment = function(pageNr, albumId, success, fail) {
+    public nextGallerySegment(pageNr: number, albumId: number, success: Function, fail?: Function) {
         this.ajaxCall('GET', 'Photos', 'Page', pageNr, {albumId: albumId}, success, fail);
     }
-    this.refresh = function(success, fail) {
+
+    public refresh(success: Function, fail?: Function) {
         this.ajaxCall('POST', 'Synchronization', 'SyncModule', null, null, success, fail);
     }
-    this.sendFile = function(fileToSend, albumName, success, fail) {
+
+    public sendFile(fileToSend: any, albumName: string, success: Function, fail?: Function) {
         this.ajaxCall('POST', 'Photos', 'Send', null, {
             fileName: fileToSend.fileName,
             newName: fileToSend.newName,
             albumName: albumName
         }, success, fail);
     }
-
 }

@@ -1,19 +1,52 @@
-var GalleryPhoto = require("./photo-gallery-photo.jsx");
+import * as React from "react";
+import * as Models from "../Models/";
+import GalleryPhoto from "./GalleryPhoto";
 
-module.exports = React.createClass({
-  getInitialState() {
-    return {
-      photos: this.props.photos,
+declare module "react" {
+  interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
+    // extends React's HTMLAttributes
+    itemscope?: any;
+    itemtype?: string;
+  }
+}
+
+interface IPhotoGalleryProps {
+  module: Models.IAppModule;
+  photos: any[];
+  albumId: number;
+  photoList: any[];
+}
+
+interface IPhotoGalleryState {
+  photos: any[];
+  currentPage: number;
+  lastPage: boolean;
+  loading: boolean;
+}
+
+declare var PhotoSwipe: any;
+declare var PhotoSwipeUI_Default: any;
+
+export default class PhotoGallery extends React.Component<
+  IPhotoGalleryProps,
+  IPhotoGalleryState
+> {
+  refs: {};
+
+  constructor(props: IPhotoGalleryProps) {
+    super(props);
+    this.state = {
+      photos: props.photos,
       currentPage: 0,
-      lastPage: this.props.photos.length < 50,
+      lastPage: props.photos.length < 50,
       loading: false
     };
-  },
+  }
 
   onMoreClick(e) {
     e.preventDefault();
     this.loadNextSegment();
-  },
+  }
 
   hookUpSwipe() {
     $(".cfg-gallery figure").unbind("click");
@@ -34,7 +67,7 @@ module.exports = React.createClass({
     $(".pswp").click(e => {
       e.preventDefault();
     });
-  },
+  }
 
   loadNextSegment() {
     if (!this.state.loading) {
@@ -58,11 +91,11 @@ module.exports = React.createClass({
         }
       );
     }
-  },
+  }
 
   componentDidUpdate() {
     this.hookUpSwipe();
-  },
+  }
 
   componentDidMount() {
     $(document).ready(() => {
@@ -78,9 +111,9 @@ module.exports = React.createClass({
       });
       this.hookUpSwipe();
     });
-  },
+  }
 
-  render() {
+  public render(): JSX.Element {
     var photos = this.state.photos.map(item => {
       return <GalleryPhoto photo={item} key={item.PhotoId} />;
     });
@@ -100,4 +133,4 @@ module.exports = React.createClass({
       </div>
     );
   }
-});
+}

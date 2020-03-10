@@ -61,7 +61,7 @@ var commonConfig = {
 var mainAppConfig = Object.assign({}, commonConfig, {
   context: path.join(__dirname, "./js"),
   entry: {
-    flickrgallery: "./main.jsx"
+    flickrgallery: "./App.ts"
   },
   output: {
     path: isProduction
