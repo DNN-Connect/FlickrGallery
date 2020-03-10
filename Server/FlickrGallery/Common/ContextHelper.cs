@@ -84,10 +84,6 @@ namespace Connect.DNN.Modules.FlickrGallery.Common
             DotNetNuke.Framework.ServicesFramework.Instance.RequestAjaxScriptSupport();
             AddScript("FlickrGallery.js");
         }
-        public void AddReactJs()
-        {
-            AddScript("react.min.js", "react", "0.13.3");
-        }
         public void ThrowAccessViolation()
         {
             throw new Exception("You do not have adequate permissions to view this resource. Please check your login status.");
