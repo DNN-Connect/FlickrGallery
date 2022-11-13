@@ -87,7 +87,7 @@
     "typescript": "^3.3.3",
     "validator": "^10.11.0",
     "webpack": "^4.29.5",
-    "webpack-cli": "^3.2.3"
+    "webpack-cli": "^3.3.12"
   },
   "dependencies": {
     "react": "^16.13.0",
